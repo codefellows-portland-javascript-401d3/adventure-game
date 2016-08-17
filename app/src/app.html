@@ -1,0 +1,54 @@
+<h1> Controllers </h1>
+
+<div ng-controller="game">
+
+  <ul>Game Commands:
+    <li ng-show="gameCommands" ng-repeat="gameCommand in gameCommands">{{gameCommand}}</li>
+  </ul>
+
+  <label>Command: <input type="text" ng-model="input"><button ng-click="act(input)">Make Move</button>
+
+  <p>Game Status: {{getStatus()}}
+
+
+
+  <div ng-controller="player">
+    <p>Player Status: {{getPlayerStatus()}}
+  </div>
+
+  <div ng-controller="location">
+    <ul>
+      <li>Location: {{getCurrent()}}</li>
+      <li>Enemies: {{showEnemies(current)}}</li>
+      <li>Weapons: {{showWeapons(current)}}</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- <div ng-controller="counter">
+  {{count}}
+  <button ng-click="add()">Add</button>
+  <input ng-keydown="checkEvent($event)" ng-init="num=0">
+  <div>Keydown Count is: {{num}}
+  <div>
+    Half Count is: {{half(count)}}
+  </div>
+</div>
+
+<div ng-controller="cowsay">
+  <select ng-model="type" ng-options="type for type in types"></select>
+  <label>
+    <input type="radio" ng-model="method" value="say">
+    Say
+  </label>
+  <label>
+    <input type="radio" ng-model="method" value="think">
+    Think
+  </label>
+  <input type="text" ng-model="text">
+  <pre>{{say(type, method, text)}}</pre>
+  <ul>
+    <li ng-show="type.startsWith('d')" ng-repeat="type in types">{{type}}</li>
+  </ul>
+</div> -->

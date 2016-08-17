@@ -1,19 +1,25 @@
-![cf](http://i.imgur.com/7v5ASc8.png) Angular Adventure Game
+![cf](http://i.imgur.com/7v5ASc8.png) Angular "Fun Greeting" App with Webpack
 ====
 
-Create a text based adventure game! For this assignment you'll be creating a text based adventure game ala Zork. 
+Build a client side fun greeting application. Your index.html pulls in your bundle in the context an angular app. Make sure to style your app using some css.
 
-* This game should have at least two rooms that the player can move between. 
+Your app should be usable in both:
+* Development mode
+  * running webpack dev server
+* "Production" mode - 
+  * Project assets, bundled js file, html file(s) and css file(s), served 
+  via Express (you don't need to actually run in express)
 
-* One item that the player can interact with and one monster for the player to defeat. 
+Webpack should: 
+* including linting of js files
+* be runnable via dev server
+* create a bundle.js for "production" build
+* inject the bundle.js script into your index.html
 
-* Your webpage should have a command input and a button or a form submission to do something based on the command. 
+Angular should run and load properly in both modes.
 
-* No need to try and persist the data. 
-
-* Make sure to create each of your different commands or actions as functions on your controller.
-
-## Rubric
-* Command Processing: 3pts 
-* Game Construction: 4pts 
-* Build Process: 3pts
+Bonus:
+* Webpack:
+  * ES6 FTW! Babel your js files and use ES6 module loading **1pts**
+* Angular:
+  * Two-way binding: As a bonus make your app capable of changing the cow image to something else. **1pts**

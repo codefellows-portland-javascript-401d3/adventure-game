@@ -1,0 +1,31 @@
+h1 {
+  color: steelblue;
+}
+
+/*body {
+  font-family: 'VT323', monospace;
+}
+
+body {
+  font-family: 'Special Elite', cursive;
+}*/
+
+body {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.5rem;
+}
+
+button {
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+}
+
+input {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.5rem;
+}
+
+select {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.5rem;
+}
