@@ -1,13 +1,12 @@
-// import action from './action';
-
 export default function game($scope, $timeout){
-  $scope.location = 'dark';
+  $scope.location = 'cave';
   $scope.inventory = [];
-  $scope.hunger = 'high';
+  $scope.wearing = ['loincloth'];
+  $scope.near = ['spider','a club'];
   $scope.actions = [
     {
-      command: 'Text Game',
-      response: 'It is dark.'
+      command: 'start game',
+      response: 'A giant spider is crawling toward you.'
     }
   ];
 
