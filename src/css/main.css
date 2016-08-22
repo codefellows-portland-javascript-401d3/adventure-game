@@ -31,6 +31,8 @@ button:hover {
 
 p {
   text-align: justify;
+  font-weight: 300;
+  font-size: 1.25em;
 }
 
 /* --------------- HEADER --------------- */

@@ -12,7 +12,7 @@
         <input ng-show="!hasName" ng-model="name" placeholder="what is your name?"></input>
         <button ng-show="!hasName" ng-click="submitName()">Enter</button>
 
-        <input ng-show="hasName" ng-model="input" placeholder="Commands : 'get', 'go to', 'use', or 'buy'"></input>
+        <input ng-show="hasName" ng-model="input" placeholder="Commands : 'get', 'go to', 'use', or 'buy'" onblur="this.focus()" autofocus></input>
         <button ng-show="hasName" ng-click="submit()">Enter</button>
       </div>
       <p style="white-space:pre-wrap;">{{prompt}}</p>
