@@ -2,9 +2,9 @@
   "name": "basic-angular-webpack-app",
   "version": "1.0.0",
   "description": "Get Angular",
-  "main": "bundle.js",
+  "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline",
+    "start:dev": "webpack-dev-server --inline",
     "build": "webpack",
     "test": "karma start"
   },

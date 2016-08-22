@@ -118,7 +118,6 @@ export default function player ($scope) {
       $scope.message = room.win;
       $scope.gameState = null;
 
-
     } else { $scope.message = 'You cannot make a sandwich here.'; }
   };
 

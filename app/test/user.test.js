@@ -1,7 +1,6 @@
-//globals: angular, chai
 const assert = chai.assert;
 
-describe('counter controller', () => {
+describe('player controller', () => {
 
   beforeEach(angular.mock.module('controllers'));
 
@@ -9,10 +8,13 @@ describe('counter controller', () => {
   beforeEach(angular.mock.inject(function($rootScope, _$controller_){
     $scope = $rootScope.$new();
     $controller = _$controller_;
+    $controller('player', {$scope});
   }));
 
-  it('defaults to initial count 1', () => {
-    $controller('counter', {$scope});
-    assert.equal($scope.count, 1);
+  //maybe should be tested in user.test.js
+  it('adds an item to user items if item exits in room', () => {
+    // $controller('game', {$scope});
+
   });
+
 });

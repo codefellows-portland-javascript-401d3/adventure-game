@@ -17,8 +17,6 @@ class User {
       output = this.location.initial;
       this.location.visited++;
     } else if (!this.location.enemy && !this.location.noEnemy) {
-      //check for a 'had item' property that would indicate room once contained an item
-      //also a check that room had been visited before
       this.location.visited > 0 ? (
         output = this.location.beenHere,
         this.location.visited++

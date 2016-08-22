@@ -3,7 +3,7 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <div id="game-information" ng-controller="player">
           <h3 ng-if="!gameSettings.completed"><b>Game Status: {{getStatus()}}</b></h3>
           <div ng-if="gameSettings.completed">
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <div ng-if="!gameSettings.completed">
           <h3><b><em>Game Commands</em></b></h3>
           <ul>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="row">
-      <div id="player-information" class="col-md-6">
+      <div id="player-information" class="col-sm-6">
         <h3><b><em>Player Information</em></b></h3>
         <ul>
           <li>Player Status: {{getPlayerStatus()}}</li>
@@ -42,7 +42,7 @@
         </ul>
       </div>
 
-      <div id="room-information" class="col-md-6" ng-if="!gameSettings.completed">
+      <div id="room-information" class="col-sm-6" ng-if="!gameSettings.completed">
         <h3><b><em>Room Information</em></b></h3>
         <ul>
           <li>Location: {{user.location.name}}</li>

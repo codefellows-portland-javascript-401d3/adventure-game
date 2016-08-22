@@ -14,14 +14,14 @@ module.exports = function (config) {
 
     //list of files / patterns to load in the browser
     files: [
-      './app/src/app.js',
+      './src/app.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './test/**/*.js'
     ],
     webpack: webpackConfig,
 
     preprocessors: {
-      './app/src/app.js': ['webpack'],
+      './src/app.js': ['webpack'],
       './test/**/*.js': ['babel']
     },
 
