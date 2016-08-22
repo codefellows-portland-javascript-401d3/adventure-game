@@ -10,6 +10,7 @@
 // TODO make sure plays can't skip steps or use the wrong objects
 // TODO pickup where I left off with the check...
 // TODO create a next() to handle iterating through the prompts on each object
+// TODO add a shortcut() to skip ahead to a later state (inv/balance/location) more easily
 
 export default function main ($scope) {
 
