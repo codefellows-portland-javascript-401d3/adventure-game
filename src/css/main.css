@@ -10,14 +10,6 @@ body {
   background-color: #eee;
 }
 
-.shadow {
-  -webkit-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));
-  -moz-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));
-  -ms-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));
-  -o-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));
-  filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));
-}
-
 button {
   display: inline-block;
   background-color: transparent;
@@ -48,12 +40,11 @@ p {
   width: 100%;
   position: relative;
   top: 0;
-  left: 0;
-  background-image: url('http://static.tumblr.com/7bljswk/yHQm2pths/logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 250px;
-  z-index: 1000;
+  text-align: center;
+  padding: 5px 10px;
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: 300;
 }
 
 nav {
@@ -69,11 +60,24 @@ nav {
   letter-spacing: 1px;
 }
 
+h2 {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
 h3 {
-  padding: 2px 0 3px 40px;
+  padding: 2px 0 3px 0;
   font-weight: 400;
   display: inline-block;
   color: #000;
+}
+
+h5 {
+  font-weight: 300;
+  font-size: 1.25em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 5px 10px;
 }
 
 /* --------------- MAIN --------------- */
@@ -86,7 +90,8 @@ main {
 }
 
 section {
-  margin-bottom: 30px;
+  /*margin-top: 30vh;*/
+  margin-bottom: 150px;
 }
 
 input {
@@ -94,6 +99,7 @@ input {
   border: transparent;
   border-bottom: 1px solid black;
   font-size: 1.5em;
+  font-weight: 300;
   margin: 10px 0;
   display: inline-block;;
   width: calc(99% - 122px);
@@ -107,6 +113,7 @@ footer {
   background-color: #ccc;
   position: fixed;
   bottom: 0;
+  padding: 20px;
 }
 
 .inventory, .balance {

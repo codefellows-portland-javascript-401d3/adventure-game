@@ -2,6 +2,11 @@
 // TODO energy mechanic, energy is used with interactions, driving need for coffee/beer
 // TODO money mechanic, lose game when broke not enough money to buy any more "upgrades"
 // TODO car/transit mechanic, pay to move between locations
+// TODO reconnect use attachment functionality instead of auto reading once getting
+// TODO restyle prompt to show all but most recent prompt prints as a faded grey
+// TODO enter key = submit()
+// TODO add a "you already have it" message if inventory state is already true.
+// TODO move all prompt text to obj.prompts and use the ++obj.promptsIndex to cycle through them more consistently
 
 export default function main ($scope) {
 
@@ -13,7 +18,7 @@ export default function main ($scope) {
     current : true,
     promptIndex : -1,
     prompts : [
-      'you are a creative freelancer with a diligent work ethic, but every once in a while you come across an impossible client and all bets are off. Type "Go to my office" to begin playing Clients from Hell...'
+      'you are a creative freelancer with a diligent work ethic, but every once in a while you come across an impossible client and all bets are off. Type "Go to my office" to begin playing Freelancer\'s Fury...'
     ],
     gets : [],
     uses : [],
@@ -24,9 +29,9 @@ export default function main ($scope) {
     current : false,
     promptIndex : -1,
     prompts : [
-      'You are hard at work when you hear the little **ding** from your email program. Clicking over to look at it you find a message from a prospective client wanting to hire you for some web design work, they\'ve attached a pdf with the outline of the project they have in mind. Knowing your bank account is dwindling, you ARE in a bit of a pinch financially and could use some new work -- if only you could read that attachment...', // get attachment
+      'You are hard at work when you hear the little **ding** from your email program. Clicking over to look at it you find a message from a prospective client wanting to hire you for some web design work, they\'ve attached a pdf with the outline of the project they have in mind. Knowing your bank account is dwindling, you ARE in a bit of a pinch financially and could use some new work -- if only you had your own copy of that attachment...', // get attachment
       'After reading over the file from the client you see that most everything they want is within your capability, but there is one small step you forsee needing to learn -- if only you had a book you could reference...', // use book
-      'You\'ve written back to the client and expressed interest in the project but the next step is to bring some ideas to the table to convince them that you\'re the freelancer for them! You\'ve got a few hours work ahead of you before you can meet up with them for happy hour to go over your ideas but you\'re incredibly distractable today -- if only you had something to drown out the world full of distractions...', // use music
+      'Excellent! That looks easy enough to learn ! You write back to the client and express interest in the project but the next step is to bring some ideas to the table to convince them that you\'re the freelancer for them! You\'ve got a few hours work ahead of you before you can meet up with them for happy hour to go over your ideas but you\'re incredibly distractable today -- if only you had something to drown out the world full of distractions...', // use music
       'Alright the work is done and you\'re ready to meet up with the client to go over your ideas -- if only you were at the coffee shop already...', // go to coffee shop
     ],
     gets : [
@@ -42,9 +47,9 @@ export default function main ($scope) {
     current : false,
     promptIndex : -1,
     prompts : [
-      'client late',
-      'client changes mind',
-      'client negotiate price',
+      'You arrived a few minutes early and got a text from the client that they\'re running late. No worries, go ahead and buy a coffee while you wait...',
+      'The client arrives before too long. After a bit of talking they\'ve decided that they want to go with one of the designs you mocked up to show as an example! What\'s more, the client has already approved your design spec! What luck! Better snag that before it gets lost...',
+      'Money is always a sticky topic to approach. The client originaly wanted to pay your full rate, but because they chose one of your "pre-made" designs they want to renegotiate! You sip your coffee slowly and wait for the pulse pounding in your temples to calm. You stick to your guns and carefully explain that while the design was complete prior to the meeting, the reason you were able to do so was that you are a highly trained designer and have spent quite a lot of money on your education and your tools. The client sighs and apologizes. They never wanted to devalue your work. They agree to pay your originally quoted fee and they sign the contract. Better file that away too...',
     ],
     gets : [
       'approved design spec',
@@ -58,8 +63,9 @@ export default function main ($scope) {
     current : false,
     promptIndex : -1,
     prompts : [
-      'cust wants to start over',
-      'deliver final work',
+      'Oh no! Immediate disaster upon walking into the client\'s office. Their partners didn\'t know that decisions were being made at the coffee shop before they were involved. Several of them ask if there is any room left for negotiation or not--Now would be a good time to show them the agreed-upon design spec and the signed contract...',
+      'Alright, now that they\'ve seen the materials you presented in the coffee shop they\'ve calmed down quite a bit. Several of them have repeatedly mentioned that your design absolutely nailed the idea they had in their head! Now to present the contract...',
+      '"These terms are quite agreeable!" exclaims the CFO. Holy cow, he\'s already got a pen out and is signing your check. Don\'t forget to snag that before you go...',
     ],
     gets : [
       'money'
@@ -117,6 +123,7 @@ export default function main ($scope) {
     attachment : false,
     spec : false,
     contract : false,
+    check : false,
   };
   $scope.reset = function () {
     this.input = '';
@@ -147,7 +154,7 @@ export default function main ($scope) {
     return 'Inventory : ' + invArray.join(', ');
   };
   $scope.displayBal = function () {
-    return 'Balance : $' + $scope.balance;
+    return 'Bank Balance : $' + $scope.balance;
   };
   $scope.locationOutput = function (location) {
     $scope.prompt = `You have arrived at ${location.output}\n\n${$scope.prompt}`;
@@ -170,9 +177,9 @@ export default function main ($scope) {
       $scope.prompt = `You can't go there. The locations you can choose from are "my office", "the coffee shop", "the client's office", and "the bar" — though, depending on where you are located currently, some of those options may not be accessible.\n\n${$scope.prompt}`;
     }
 
-    function buySuccess (item, cost) {
+    function buySuccess (item, cost, next) {
       $scope.balance -= cost;
-      $scope.prompt = `Success! You bought a small ${item} for $${cost}, you\'re now down to a balance of $${$scope.balance}.\n\n${$scope.prompt}`;
+      $scope.prompt = `Success! You bought a small ${item} for $${cost}, you\'re now down to a balance of $${$scope.balance}. ${next}.\n\n${$scope.prompt}`;
     }
 
     function buyFail (item, cost) {
@@ -185,6 +192,14 @@ export default function main ($scope) {
 
     function nothingToBuy() {
       $scope.prompt = `This isn't a location where you can really buy things. Save your money and get on with the tasks at hand...\n\n${$scope.prompt}`;
+    }
+
+    function notUseful() {
+      $scope.prompt = `I don't think that's going to be terribly useful. Let's just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
+    }
+
+    function nothingToGet() {
+      $scope.prompt = `There's nothing to get at this point in the game. We'll just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
     }
 
     if (input.includes('go')) {
@@ -210,85 +225,90 @@ export default function main ($scope) {
       if ($scope.currentLoc == coffee.output) {
         let item = 'coffee';
         let cost = 3;
+        let next = `Ahhh, that coffee really hits the spot. ${coffee.prompts[++coffee.promptIndex]}\n\n${$scope.prompt}`;
         if (input.includes(item)) {
-          if ($scope.balance < cost) {
-            return buyFail(item, cost);
-          }
-          else {
-            return buySuccess(item, cost);
-          }
+          if ($scope.balance < cost) return buyFail(item, cost);
+          else return buySuccess(item, cost, next);
         }
-        else {
-          return buyWrong(item, cost);
-        }
+        else return buyWrong(item, cost);
       }
       else if ($scope.currentLoc == bar.output) {
         let item = 'beer';
         let cost = 5;
+        let next = `Ahhh, that beer really hits the spot.\n\n${$scope.prompt}`;
         if (input.includes(item)) {
-          if ($scope.balance < cost) {
-            return buyFail(item, cost);
-          }
-          else {
-            return buySuccess(item, cost);
-          }
+          if ($scope.balance < cost) return buyFail(item, cost);
+          else return buySuccess(item, cost, next);
         }
-        else {
-          return buyWrong(item, cost);
-        }
+        else return buyWrong(item, cost);
       }
-      else {
-        return nothingToBuy();
-      }
+      else return nothingToBuy();
     }
     else if (input.includes('get')) {
-
       if ($scope.currentLoc == office.output) {
         if (office.promptIndex === 0) {
           if (input.includes('attachment')) {
-            // can get attachment at promptIndex = 0
             $scope.inventory.attachment = true;
-            $scope.prompt = `Success! You've snagged the email attachment and added it to your inventory. Now you can read through it and see exactly what the client wants...${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
+            $scope.prompt = `Success! You've snagged the email attachment and added it to your inventory. Now would be as good a time to read it as any...\n\n${$scope.prompt}`;
           }
-          else {
-            // what they asked for isn't available in the game
-            $scope.prompt = `I don't think that's going to be terribly useful. Let's just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
-          }
+          else return notUseful();
         }
-        // nothing else to get at this promptIndex
-        else {
-          $scope.prompt = `There's nothing to get at this point in the game. We'll just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
-        }
+        else return nothingToGet();
       }
       else if ($scope.currentLoc == coffee.output) {
         if (coffee.promptIndex === 1) {
           if (input.includes('spec')) {
-            // can get spec at promptIndex = 1
             $scope.inventory.spec = true;
             $scope.prompt = `Success! You've managed to get an approved design spec and added it to your inventory. Now comes the hard part...${coffee.prompts[++coffee.promptIndex]}\n\n${$scope.prompt}`;
           }
-          else {
-            // what they asked for isn't available in the game
-            $scope.prompt = `I don't think that's going to be terribly useful. Let's just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
+          else return notUseful();
+        }
+        if (coffee.promptIndex === 2) {
+          if (input.includes('contract')) {
+            $scope.inventory.contract = true;
+            $scope.prompt = `Success! You've managed to get a signed contract and added it to your inventory. That concludes our meeting, the client miraculously agreed to one of your mocked up examples so now you just export and meet the rest of their team to deliver the finals. Off to their office you go...\n\n${$scope.prompt}`;
           }
         }
-        // nothing else to get at this promptIndex
-        else {
-          $scope.prompt = `There's nothing to get at this point in the game. We'll just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
-        }
-
-        // can get approved design spec at prompts[1]
-        // can get signed contract at prompts[2]
+        else return nothingToGet();
       }
       else if ($scope.currentLoc == client.output) {
         // can get money at prompts[1]
+        if (coffee.promptIndex === 1) {
+          if (input.includes('check')) {
+            $scope.inventory.check = true;
+            $scope.prompt = `Success! You've turned over the final work and received your check! Check out all those zeroes! Sure feels good to have that hit your account, eh? How about we head out to the bar to celebrate...\n\n${$scope.prompt}`;
+          }
+        }
       }
       else {
-        // nothing to get in this room
-        $scope.prompt = `There's nothing to get at this point in the game. We'll just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
+        return nothingToGet();
       }
     }
-
+    else if (input.includes('use')) {
+      if (input.includes('book')) {
+        $scope.inventory.book = false;
+        $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      if (input.includes('music')) {
+        $scope.inventory.music = false;
+        $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      if (input.includes('attachment')) {
+        $scope.inventory.attachment = false;
+        $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      if (input.includes('spec')) {
+        $scope.inventory.spec = false;
+        $scope.prompt = `${client.prompts[++client.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      if (input.includes('contract')) {
+        $scope.inventory.contract = false;
+        $scope.prompt = `${client.prompts[++client.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      if (input.includes('check')) {
+        $scope.prompt = `Using the check!\n\n${$scope.prompt}`;
+      }
+    }
 
     // $scope.prompt = `SOMETHING GOES HERE\n\n${$scope.prompt}`;
   };
