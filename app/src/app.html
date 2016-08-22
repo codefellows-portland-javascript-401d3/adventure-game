@@ -1,0 +1,31 @@
+<div ng-controller="main" class="container">
+  <div ng-show="room === ''" class="row">
+    <h1>{{heading}}</h1>
+    <p>{{intro}}</p>
+  </div>
+  <div ng-show="room === 'desk'" ng-controller="desk" class="row">
+    <h1>{{heading}}</h1>
+    <h3>Location: {{location}}</h3>
+    <p>{{deskText}}</p>
+  </div>
+  <div ng-show="room === 'bossDesk'" ng-controller="bossDesk" class="row">
+    <h1>{{heading}}</h1>
+    <h3>Location: {{location}}</h3>
+    <p>{{bossDeskText}}</p>
+  </div>
+  <div ng-show="room === 'breakroom'" ng-controller="breakroom" class="row">
+    <h1>{{heading}}</h1>
+    <h3>Location: {{location}}</h3>
+    <p>{{breakroomText}}</p>
+  </div>
+  <div ng-show="room === 'end'" ng-controller="end" class="row">
+    <p>{{endText}}</p>
+  </div>
+  <div class="row">
+    <button class="{{class}}" ng-hide="room === 'desk' || room === 'end'" ng-click="room = 'desk'">Go to your desk</button>
+    <button class="{{class}}" ng-hide="room === 'bossDesk' || room === 'end'" ng-click="room = 'bossDesk'">Go to Boss's desk</button>
+    <button class="{{class}}" ng-hide="room === 'breakroom' || room === 'end'" ng-click="room = 'breakroom'">Go to the breakroom</button>
+    <button class="{{class}}" ng-show="cake && room === 'bossDesk'" ng-click="winning()"> Tempt with Cake</button>
+    <button class="{{class}}" ng-if="!cake" ng-hide="room !== 'breakroom'" ng-click="getCake()">Snag Creed's Cake</button>
+  </div>
+</div>
