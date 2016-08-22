@@ -7,6 +7,9 @@
 // TODO enter key = submit()
 // TODO add a "you already have it" message if inventory state is already true.
 // TODO move all prompt text to obj.prompts and use the ++obj.promptsIndex to cycle through them more consistently
+// TODO make sure plays can't skip steps or use the wrong objects
+// TODO pickup where I left off with the check...
+// TODO create a next() to handle iterating through the prompts on each object
 
 export default function main ($scope) {
 
@@ -66,6 +69,8 @@ export default function main ($scope) {
       'Oh no! Immediate disaster upon walking into the client\'s office. Their partners didn\'t know that decisions were being made at the coffee shop before they were involved. Several of them ask if there is any room left for negotiation or not--Now would be a good time to show them the agreed-upon design spec and the signed contract...',
       'Alright, now that they\'ve seen the materials you presented in the coffee shop they\'ve calmed down quite a bit. Several of them have repeatedly mentioned that your design absolutely nailed the idea they had in their head! Now to present the contract...',
       '"These terms are quite agreeable!" exclaims the CFO. Holy cow, he\'s already got a pen out and is signing your check. Don\'t forget to snag that before you go...',
+      'The client miraculously agreed to one of your mocked up examples so now you just export and meet the rest of their team to deliver the finals. Off to their office you go...',
+      'Sure feels good to have that hit your account, eh? How about we head out to the bar to celebrate...',
     ],
     gets : [
       'money'
@@ -116,7 +121,7 @@ export default function main ($scope) {
   $scope.prompt = '';
   $scope.currentLoc = start.output;
   $scope.hasName = false;
-  $scope.balance = 20;
+  $scope.balance = 5;
   $scope.inventory = {
     book : true,
     music : true,
@@ -173,16 +178,24 @@ export default function main ($scope) {
     let input = $scope.input.toLowerCase();
     $scope.input = '';
 
+    // go replies
+
     function cantGoThere () {
       $scope.prompt = `You can't go there. The locations you can choose from are "my office", "the coffee shop", "the client's office", and "the bar" — though, depending on where you are located currently, some of those options may not be accessible.\n\n${$scope.prompt}`;
     }
 
-    function buySuccess (item, cost, next) {
-      $scope.balance -= cost;
-      $scope.prompt = `Success! You bought a small ${item} for $${cost}, you\'re now down to a balance of $${$scope.balance}. ${next}.\n\n${$scope.prompt}`;
+    // buy replies
+
+    function next(locationObj) {
+      return `${locationObj.prompts[++locationObj.promptIndex]}`;
     }
 
-    function buyFail (item, cost) {
+    function buySuccess(item, cost, locationObj) {
+      $scope.balance -= cost;
+      $scope.prompt = `Success! You bought a small ${item} for $${cost}, you\'re now down to a balance of $${$scope.balance}. Ahhh, that ${item} really hits the spot...${next(locationObj)}\n\n${$scope.prompt}`;
+    }
+
+    function buyFail(item, cost) {
       $scope.prompt = `Bummer! You don't have enough money for a $${cost} ${item}, you\'re currently down to a balance of $${$scope.balance}.\n\n${$scope.prompt}`;
     }
 
@@ -194,122 +207,125 @@ export default function main ($scope) {
       $scope.prompt = `This isn't a location where you can really buy things. Save your money and get on with the tasks at hand...\n\n${$scope.prompt}`;
     }
 
+    // use replies
+
     function notUseful() {
       $scope.prompt = `I don't think that's going to be terribly useful. Let's just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
     }
+
+    // get replies
 
     function nothingToGet() {
       $scope.prompt = `There's nothing to get at this point in the game. We'll just ignore this minor transgression and keep going...\n\n${$scope.prompt}`;
     }
 
+    function getSuccess(item, response) {
+      $scope.inventory[item] = true;
+      $scope.prompt = `Success! You've snagged the ${item} and added it to your inventory--${response}...\n\n${$scope.prompt}`;
+    }
+
+    function getFail() {
+
+    }
+
+
+
     if (input.includes('go')) {
-      // find current location
       for (var b = 0; b < locationStringArray.length; b++) {
         if (locationStringArray[b].current == true) {
           for (var c = 0; c < locationStringArray[b].tos.length; c++) {
             const newLocation = locationStringArray[b].tos[c];
             if (input.includes(newLocation.string)) {
               $scope.resetLoc(newLocation);
-              $scope.prompt = `${newLocation.prompts[++newLocation.promptIndex]}\n\n${$scope.prompt}`;
-              return;
+              return $scope.prompt = `${newLocation.prompts[++newLocation.promptIndex]}\n\n${$scope.prompt}`;
             }
           }
           return cantGoThere();
         }
-        else {
-          console.error();('there isn\'t a current location...');
-        }
+        else console.error();('there isn\'t a current location...');
       }
     }
+
     else if (input.includes('buy')) {
       if ($scope.currentLoc == coffee.output) {
         let item = 'coffee';
         let cost = 3;
-        let next = `Ahhh, that coffee really hits the spot. ${coffee.prompts[++coffee.promptIndex]}\n\n${$scope.prompt}`;
         if (input.includes(item)) {
           if ($scope.balance < cost) return buyFail(item, cost);
-          else return buySuccess(item, cost, next);
+          else return buySuccess(item, cost, coffee);
         }
         else return buyWrong(item, cost);
       }
       else if ($scope.currentLoc == bar.output) {
         let item = 'beer';
         let cost = 5;
-        let next = `Ahhh, that beer really hits the spot.\n\n${$scope.prompt}`;
+        let next = `${bar.prompts[++bar.promptIndex]}`;
         if (input.includes(item)) {
           if ($scope.balance < cost) return buyFail(item, cost);
-          else return buySuccess(item, cost, next);
+          else return buySuccess(item, cost, bar);
         }
         else return buyWrong(item, cost);
       }
       else return nothingToBuy();
     }
+
     else if (input.includes('get')) {
       if ($scope.currentLoc == office.output) {
         if (office.promptIndex === 0) {
-          if (input.includes('attachment')) {
-            $scope.inventory.attachment = true;
-            $scope.prompt = `Success! You've snagged the email attachment and added it to your inventory. Now would be as good a time to read it as any...\n\n${$scope.prompt}`;
-          }
+          if (input.includes('attachment')) return getSuccess('attachment', 'Now would be as good a time to read it as any...');
           else return notUseful();
         }
         else return nothingToGet();
       }
       else if ($scope.currentLoc == coffee.output) {
         if (coffee.promptIndex === 1) {
-          if (input.includes('spec')) {
-            $scope.inventory.spec = true;
-            $scope.prompt = `Success! You've managed to get an approved design spec and added it to your inventory. Now comes the hard part...${coffee.prompts[++coffee.promptIndex]}\n\n${$scope.prompt}`;
-          }
+          if (input.includes('spec')) return getSuccess('spec', `Now comes the hard part...${next(coffee)}`);
           else return notUseful();
         }
         if (coffee.promptIndex === 2) {
-          if (input.includes('contract')) {
-            $scope.inventory.contract = true;
-            $scope.prompt = `Success! You've managed to get a signed contract and added it to your inventory. That concludes our meeting, the client miraculously agreed to one of your mocked up examples so now you just export and meet the rest of their team to deliver the finals. Off to their office you go...\n\n${$scope.prompt}`;
-          }
+          if (input.includes('contract')) return getSuccess('contract', 'That concludes our meeting, guess we should get over to the client\'s office to meet the rest of the team.');
         }
         else return nothingToGet();
       }
       else if ($scope.currentLoc == client.output) {
-        // can get money at prompts[1]
-        if (coffee.promptIndex === 1) {
-          if (input.includes('check')) {
-            $scope.inventory.check = true;
-            $scope.prompt = `Success! You've turned over the final work and received your check! Check out all those zeroes! Sure feels good to have that hit your account, eh? How about we head out to the bar to celebrate...\n\n${$scope.prompt}`;
-          }
+        if (client.promptIndex === 1) {
+          if (input.includes('check')) return getSuccess('check', 'Check out all those zeroes!');
         }
       }
-      else {
-        return nothingToGet();
-      }
+      else return nothingToGet();
     }
+
     else if (input.includes('use')) {
-      if (input.includes('book')) {
-        $scope.inventory.book = false;
-        $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
-      }
-      if (input.includes('music')) {
-        $scope.inventory.music = false;
-        $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
-      }
       if (input.includes('attachment')) {
         $scope.inventory.attachment = false;
         $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
       }
-      if (input.includes('spec')) {
+      else if (input.includes('book')) {
+        $scope.inventory.book = false;
+        $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      else if (input.includes('music')) {
+        $scope.inventory.music = false;
+        $scope.prompt = `${office.prompts[++office.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      else if (input.includes('spec')) {
         $scope.inventory.spec = false;
         $scope.prompt = `${client.prompts[++client.promptIndex]}\n\n${$scope.prompt}`;
       }
-      if (input.includes('contract')) {
+      else if (input.includes('contract')) {
         $scope.inventory.contract = false;
         $scope.prompt = `${client.prompts[++client.promptIndex]}\n\n${$scope.prompt}`;
       }
-      if (input.includes('check')) {
-        $scope.prompt = `Using the check!\n\n${$scope.prompt}`;
+      else if (input.includes('check')) {
+        $scope.inventory.check = false;
+        $scope.prompt = `${client.prompts[++client.promptIndex]}\n\n${$scope.prompt}`;
+      }
+      else {
+        $scope.prompt = `You can't **use** that, you don't **have** that. Let's try something else...\n\n${$scope.prompt}`;
       }
     }
-
-    // $scope.prompt = `SOMETHING GOES HERE\n\n${$scope.prompt}`;
+    else {
+      $scope.prompt = `I don't understand what you're trying to do. Let's try something else...\n\n${$scope.prompt}`;
+    }
   };
 }
