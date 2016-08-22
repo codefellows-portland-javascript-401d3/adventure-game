@@ -21,6 +21,7 @@ export default function input($scope){
         action.response = look($scope.location,$scope.near);
         break;
       case (input[2]):
+      case (input[9]):
         action.response = inv($scope.inventory);
         break;
       case (input[3]):
@@ -46,7 +47,7 @@ export default function input($scope){
       if(near.includes('spider')) {
         response += 'It\'s hard to take your eyes off the giant spider slowly crawling toward you. ';
       } else {
-        response += 'Now that the big scary spider is dead, you notice the ground is a little to flat. The rocky walls look a bit like they\'ve been painted. And in fact half the cave is missing. Where you thought was a wall, is in fact a large audience seated in stadium rows. They are applauding. For you.';
+        response += 'Now that the big scary spider is dead, you notice the ground is a little too flat. The rocky walls look a bit like they\'ve been painted. And in fact half the cave is missing. Where you thought was a wall, is in fact a large audience seated in stadium rows. They are applauding. For you.';
       }
     } 
     if(near.includes('a club')) {
@@ -102,6 +103,7 @@ export default function input($scope){
     'kill spider',
     'hit spider',
     'hit spider with club',
-    'kill spider with club'
+    'kill spider with club',
+    'inv'
   ];
 }
