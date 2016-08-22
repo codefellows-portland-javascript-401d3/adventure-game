@@ -1,0 +1,51 @@
+{
+  "name": "adventure-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --inline",
+    "build": "webpack",
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katesowles/adventure-game.git"
+  },
+  "author": "Kate Sowles <katesowles@gmail.com> (http://katesowles.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/katesowles/adventure-game/issues"
+  },
+  "homepage": "https://github.com/katesowles/adventure-game#readme",
+  "devDependencies": {
+    "angular-mocks": "^1.5.8",
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.9.0",
+    "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
+    "eslint-loader": "^1.5.0",
+    "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.21.0",
+    "karma": "^1.2.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-mocha": "^1.1.1",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-webpack": "^1.8.0",
+    "mocha": "^3.0.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "angular": "^1.5.8"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}
