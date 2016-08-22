@@ -34,6 +34,13 @@ export default function input($scope){
       case (input[8]):
         action.response = hit($scope.near,$scope.inventory);
         break;
+      case (input[10]):
+      case (input[11]):
+      case (input[12]):
+      case (input[13]):
+      case (input[14]):
+        action.response = exit($scope.near,$scope.location);
+        break;
       default:
         action.response = 'I don\'t know how to respond to that.';
     }
@@ -47,9 +54,12 @@ export default function input($scope){
       if(near.includes('spider')) {
         response += 'It\'s hard to take your eyes off the giant spider slowly crawling toward you. ';
       } else {
-        response += 'Now that the big scary spider is dead, you notice the ground is a little too flat. The rocky walls look a bit like they\'ve been painted. And in fact half the cave is missing. Where you thought was a wall, is in fact a large audience seated in stadium rows. They are applauding. For you.';
+        response += 'Now that the big scary spider is dead, you notice the ground is a little too flat. The rocky walls look a bit like they\'ve been painted. And in fact half the cave is missing. Where you thought was a wall, is in fact a large audience seated in stadium rows. They are applauding. For you. You notice a space between two fake rocks that looks like it might be a way out.';
       }
-    } 
+    } else
+    if(location === 'room') {
+      response += 'You are in a small room with hanging clothes, a mirror surrounded by light bulbs, and a short stool. There are make-up supplies on a small table in front of the mirror. ';
+    }
     if(near.includes('a club')) {
       response += ' You think you see a club lying nearby.';
     }
@@ -91,6 +101,22 @@ export default function input($scope){
     } else {
       response += 'That is not nearby.';
     }
+    if(near.includes('dead spider')) {
+      response += 'It\'s already dead.';
+    }
+    return response;
+  }
+
+  function exit(near,loc) {
+    let response = '';
+    if(loc === 'cave') {
+      if(near.includes('spider')) {
+        response += 'You can\'t seem to look away from the spider to find an exit. It\'s crawling toward you.';
+      } else {
+        response += 'You head for the exit. After a short walk through a dark area, you head toward a dim lit area and find yourself in a small room.';
+        $scope.location = 'room';
+      } 
+    }
     return response;
   }
 
@@ -104,6 +130,11 @@ export default function input($scope){
     'hit spider',
     'hit spider with club',
     'kill spider with club',
-    'inv'
+    'inv',
+    'exit',
+    'leave',
+    'run',
+    'run away',
+    'flee'
   ];
 }
