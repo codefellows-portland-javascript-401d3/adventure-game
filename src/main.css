@@ -1,0 +1,16 @@
+@import 'https://fonts.googleapis.com/css?family=VT323';
+
+body, input {
+  background: black;
+  color: lawngreen;
+  font-family: 'VT323', monospace;
+  /*font-weight: bold;*/
+  font-size: 1.5rem;
+  border: 0;
+  width: 95%;
+}
+
+input {
+  width: 90%;
+  outline-width: 0;
+}

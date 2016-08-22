@@ -1,0 +1,9 @@
+<div ng-controller="game">
+    <div ng-model="repl" ng-repeat="action in actions">
+        <p>> {{action.command}}</p>
+        <p>{{action.response}}</p>
+    </div>
+    <form ng-controller="input" >
+        > <input ng-model="command" ng-keypress="keycheck($event)" onblur="this.focus()" autofocus />
+    </form>
+</div>
