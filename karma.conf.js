@@ -1,3 +1,5 @@
+// filename : karma.conf.js
+
 const webpackConfig = require('./webpack.config');
 // over writes the entry parameter from the webpack config file, SUPER IMPORTANT
 webpackConfig.entry = {};
