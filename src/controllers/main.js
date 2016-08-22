@@ -22,7 +22,7 @@ export default function main ($scope) {
     current : true,
     promptIndex : -1,
     prompts : [
-      'you are a creative freelancer with a diligent work ethic, but every once in a while you come across an impossible client and all bets are off. Type "Go to my office" to begin playing Freelancer\'s Fury...'
+      'you are a creative freelancer with a diligent work ethic, but every once in a while you come across an impossible client and all bets are off. Type "Go to my office" to begin playing Freelancer\'s Fury...' // go to my office
     ],
     gets : [],
     uses : [],
@@ -51,9 +51,9 @@ export default function main ($scope) {
     current : false,
     promptIndex : -1,
     prompts : [
-      'You arrived a few minutes early and got a text from the client that they\'re running late. No worries, go ahead and buy a coffee while you wait...',
-      'The client arrives before too long. After a bit of talking they\'ve decided that they want to go with one of the designs you mocked up to show as an example! What\'s more, the client has already approved your design spec! What luck! Better snag that before it gets lost...',
-      'Money is always a sticky topic to approach. The client originaly wanted to pay your full rate, but because they chose one of your "pre-made" designs they want to renegotiate! You sip your coffee slowly and wait for the pulse pounding in your temples to calm. You stick to your guns and carefully explain that while the design was complete prior to the meeting, the reason you were able to do so was that you are a highly trained designer and have spent quite a lot of money on your education and your tools. The client sighs and apologizes. They never wanted to devalue your work. They agree to pay your originally quoted fee and they sign the contract. Better file that away too...',
+      'You arrived a few minutes early and got a text from the client that they\'re running late. No worries, go ahead and buy a coffee while you wait...', // buy coffee
+      'The client arrives before too long. After a bit of talking they\'ve decided that they want to go with one of the designs you mocked up to show as an example! What\'s more, the client has already approved your design spec! What luck! Better snag that before it gets lost...', // get spec
+      'Money is always a sticky topic to approach. The client originaly wanted to pay your full rate, but because they chose one of your "pre-made" designs they want to renegotiate! You sip your coffee slowly and wait for the pulse pounding in your temples to calm. You stick to your guns and carefully explain that while the design was complete prior to the meeting, the reason you were able to do so was that you are a highly trained designer and have spent quite a lot of money on your education and your tools. The client sighs and apologizes. They never wanted to devalue your work. They agree to pay your originally quoted fee and they sign the contract. Better file that away too...', // get contract
     ],
     gets : [
       'approved design spec',
@@ -67,11 +67,10 @@ export default function main ($scope) {
     current : false,
     promptIndex : -1,
     prompts : [
-      'Oh no! Immediate disaster upon walking into the client\'s office. Their partners didn\'t know that decisions were being made at the coffee shop before they were involved. Several of them ask if there is any room left for negotiation or not--Now would be a good time to show them the agreed-upon design spec and the signed contract...',
-      'Alright, now that they\'ve seen the materials you presented in the coffee shop they\'ve calmed down quite a bit. Several of them have repeatedly mentioned that your design absolutely nailed the idea they had in their head! Now to present the contract...',
-      '"These terms are quite agreeable!" exclaims the CFO. Holy cow, he\'s already got a pen out and is signing your check. Don\'t forget to snag that before you go...',
-      'The client miraculously agreed to one of your mocked up examples so now you just export and meet the rest of their team to deliver the finals. Off to their office you go...',
-      'Sure feels good to have that hit your account, eh? How about we head out to the bar to celebrate...',
+      'Oh no! Immediate disaster upon walking into the client\'s office. Their partners didn\'t know that decisions were being made at the coffee shop before they were involved. Several of them ask if there is any room left for negotiation or not--Now would be a good time to show them the agreed-upon design spec...', // use spec
+      'Alright, now that they\'ve seen the materials you presented in the coffee shop they\'ve calmed down quite a bit. Several of them have repeatedly mentioned that your design absolutely nailed the idea they had in their head! Now to present the contract...', // use contract
+      '"These terms are quite agreeable!" exclaims the CFO. Holy cow, he\'s already got a pen out and is signing your check. Don\'t forget to snag that before you go...', // get check
+      'Sure feels good to have that hit your account, eh? How about we head out to the bar to celebrate...', // go to bar
     ],
     gets : [
       'money'

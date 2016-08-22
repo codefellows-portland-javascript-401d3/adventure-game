@@ -92,7 +92,6 @@ main {
 }
 
 section {
-  /*margin-top: 30vh;*/
   margin-bottom: 150px;
 }
 
@@ -116,21 +115,4 @@ footer {
   position: fixed;
   bottom: 0;
   padding: 20px;
-}
-
-.inventory, .balance {
-  display: inline-block;
-  width: 40%;
-  position: relative;
-  top: 0;
-  margin: 10px 4%;
-}
-
-.inventory {
-  left: 0;
-}
-
-.balance {
-  right: 0;
-  text-align: right;
 }
