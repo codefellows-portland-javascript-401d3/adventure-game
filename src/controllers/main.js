@@ -224,9 +224,9 @@ export default function main ($scope) {
       $scope.prompt = `Success! You've snagged the ${item} and added it to your inventory--${response}...\n\n${$scope.prompt}`;
     }
 
-    function getFail() {
-
-    }
+    // function getFail() {
+    //
+    // }
 
 
 
@@ -259,7 +259,7 @@ export default function main ($scope) {
       else if ($scope.currentLoc == bar.output) {
         let item = 'beer';
         let cost = 5;
-        let next = `${bar.prompts[++bar.promptIndex]}`;
+        // let next = `${bar.prompts[++bar.promptIndex]}`;
         if (input.includes(item)) {
           if ($scope.balance < cost) return buyFail(item, cost);
           else return buySuccess(item, cost, bar);

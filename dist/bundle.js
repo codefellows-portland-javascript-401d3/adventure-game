@@ -31907,6 +31907,20 @@
 	  value: true
 	});
 	exports.default = main;
+	// TODO money mechanic, costs to drive between locations
+	// TODO energy mechanic, energy is used with interactions, driving need for coffee/beer
+	// TODO money mechanic, lose game when broke not enough money to buy any more "upgrades"
+	// TODO car/transit mechanic, pay to move between locations
+	// TODO reconnect use attachment functionality instead of auto reading once getting
+	// TODO restyle prompt to show all but most recent prompt prints as a faded grey
+	// TODO enter key = submit()
+	// TODO add a "you already have it" message if inventory state is already true.
+	// TODO move all prompt text to obj.prompts and use the ++obj.promptsIndex to cycle through them more consistently
+	// TODO make sure plays can't skip steps or use the wrong objects
+	// TODO pickup where I left off with the check...
+	// TODO create a next() to handle iterating through the prompts on each object
+	// TODO add a shortcut() to skip ahead to a later state (inv/balance/location) more easily
+	
 	function main($scope) {
 	
 	  // -------------------- global --------------------
@@ -31915,7 +31929,9 @@
 	    string: 'start',
 	    output: 'the start',
 	    current: true,
-	    prompts: ['you are a creative freelancer with a diligent work ethic, but every once in a while you come across an impossible client and all bets are off. Type "Go to my office" to begin playing Clients from Hell...'],
+	    promptIndex: -1,
+	    prompts: ['you are a creative freelancer with a diligent work ethic, but every once in a while you come across an impossible client and all bets are off. Type "Go to my office" to begin playing Freelancer\'s Fury...' // go to my office
+	    ],
 	    gets: [],
 	    uses: []
 	  };
@@ -31923,9 +31939,10 @@
 	    string: 'my office',
 	    output: 'your office',
 	    current: false,
-	    prompts: ['You are hard at work when you hear the little **ding** from your email program. Clicking over to look at it you find a message from a prospective client wanting to hire you for some web design work, they\'ve attached a pdf with the outline of the project they have in mind. Knowing your bank account is dwindling, you ARE in a bit of a pinch financially and could use some new work -- if only you could read that attached document...', // get email attachment
+	    promptIndex: -1,
+	    prompts: ['You are hard at work when you hear the little **ding** from your email program. Clicking over to look at it you find a message from a prospective client wanting to hire you for some web design work, they\'ve attached a pdf with the outline of the project they have in mind. Knowing your bank account is dwindling, you ARE in a bit of a pinch financially and could use some new work -- if only you had your own copy of that attachment...', // get attachment
 	    'After reading over the file from the client you see that most everything they want is within your capability, but there is one small step you forsee needing to learn -- if only you had a book you could reference...', // use book
-	    'You\'ve written back to the client and expressed interest in the project but the next step is to bring some ideas to the table to convince them that you\'re the freelancer for them! You\'ve got a few hours work ahead of you before you can meet up with them for happy hour to go over your ideas but you\'re incredibly distractable today -- if only you had something to drown out the world full of distractions...', // use music
+	    'Excellent! That looks easy enough to learn ! You write back to the client and express interest in the project but the next step is to bring some ideas to the table to convince them that you\'re the freelancer for them! You\'ve got a few hours work ahead of you before you can meet up with them for happy hour to go over your ideas but you\'re incredibly distractable today -- if only you had something to drown out the world full of distractions...', // use music
 	    'Alright the work is done and you\'re ready to meet up with the client to go over your ideas -- if only you were at the coffee shop already...'],
 	    gets: ['email attachment'],
 	    uses: ['book']
@@ -31934,7 +31951,10 @@
 	    string: 'coffee shop',
 	    output: 'the coffee shop',
 	    current: false,
-	    prompts: ['', '', ''],
+	    promptIndex: -1,
+	    prompts: ['You arrived a few minutes early and got a text from the client that they\'re running late. No worries, go ahead and buy a coffee while you wait...', // buy coffee
+	    'The client arrives before too long. After a bit of talking they\'ve decided that they want to go with one of the designs you mocked up to show as an example! What\'s more, the client has already approved your design spec! What luck! Better snag that before it gets lost...', // get spec
+	    'Money is always a sticky topic to approach. The client originaly wanted to pay your full rate, but because they chose one of your "pre-made" designs they want to renegotiate! You sip your coffee slowly and wait for the pulse pounding in your temples to calm. You stick to your guns and carefully explain that while the design was complete prior to the meeting, the reason you were able to do so was that you are a highly trained designer and have spent quite a lot of money on your education and your tools. The client sighs and apologizes. They never wanted to devalue your work. They agree to pay your originally quoted fee and they sign the contract. Better file that away too...'],
 	    gets: ['approved design spec', 'signed contract'],
 	    uses: []
 	  };
@@ -31942,7 +31962,11 @@
 	    string: 'client\'s office',
 	    output: 'the client\'s office',
 	    current: false,
-	    prompts: ['', '', ''],
+	    promptIndex: -1,
+	    prompts: ['Oh no! Immediate disaster upon walking into the client\'s office. Their partners didn\'t know that decisions were being made at the coffee shop before they were involved. Several of them ask if there is any room left for negotiation or not--Now would be a good time to show them the agreed-upon design spec...', // use spec
+	    'Alright, now that they\'ve seen the materials you presented in the coffee shop they\'ve calmed down quite a bit. Several of them have repeatedly mentioned that your design absolutely nailed the idea they had in their head! Now to present the contract...', // use contract
+	    '"These terms are quite agreeable!" exclaims the CFO. Holy cow, he\'s already got a pen out and is signing your check. Don\'t forget to snag that before you go...', // get check
+	    'Sure feels good to have that hit your account, eh? How about we head out to the bar to celebrate...'],
 	    gets: ['money'],
 	    uses: ['signed contract', 'approved design spec']
 	  };
@@ -31950,6 +31974,7 @@
 	    string: 'bar',
 	    output: 'the bar',
 	    current: false,
+	    promptIndex: -1,
 	    prompts: ['', '', ''],
 	    gets: [],
 	    uses: []
@@ -31958,14 +31983,15 @@
 	    string: 'end',
 	    output: 'the end',
 	    current: false,
+	    promptIndex: -1,
 	    prompts: ['In the immortal words of Ferris Bueller: "You\'re still here? It\'s over. Go home. Go."'],
-	    objects: [],
+	    gets: [],
 	    uses: []
 	  };
 	
 	  start.tos = [office];
 	  office.tos = [coffee];
-	  coffee.tos = [office, client];
+	  coffee.tos = [client, office];
 	  client.tos = [bar];
 	  bar.tos = [end];
 	  end.tos = [];
@@ -31979,15 +32005,15 @@
 	  $scope.prompt = '';
 	  $scope.currentLoc = start.output;
 	  $scope.hasName = false;
-	  $scope.balance = 20;
+	  $scope.balance = 5;
 	  $scope.inventory = {
 	    book: true,
 	    music: true,
+	    attachment: false,
 	    spec: false,
 	    contract: false,
-	    attachment: false
+	    check: false
 	  };
-	
 	  $scope.reset = function () {
 	    this.input = '';
 	    this.name = '';
@@ -32003,12 +32029,10 @@
 	      attachment: false
 	    };
 	  };
-	
 	  $scope.submitName = function () {
 	    $scope.hasName = true;
 	    $scope.prompt = 'Hello ' + $scope.name + ', ' + start.prompts[0];
 	  };
-	
 	  $scope.displayInv = function () {
 	    var invArray = [];
 	    for (var item in $scope.inventory) {
@@ -32018,15 +32042,12 @@
 	    }
 	    return 'Inventory : ' + invArray.join(', ');
 	  };
-	
 	  $scope.displayBal = function () {
-	    return 'Balance : $' + $scope.balance;
+	    return 'Bank Balance : $' + $scope.balance;
 	  };
-	
 	  $scope.locationOutput = function (location) {
 	    $scope.prompt = 'You have arrived at ' + location.output + '\n\n' + $scope.prompt;
 	  };
-	
 	  $scope.resetLoc = function (currentLoc) {
 	    // reset all by setting to false
 	    for (var a = 0; a < locationStringArray.length; a++) {
@@ -32037,76 +32058,131 @@
 	    $scope.currentLoc = currentLoc.output;
 	    $scope.locationOutput(currentLoc);
 	  };
-	
 	  $scope.submit = function () {
 	    var input = $scope.input.toLowerCase();
+	    $scope.input = '';
+	
+	    // go replies
+	
+	    function cantGoThere() {
+	      $scope.prompt = 'You can\'t go there. The locations you can choose from are "my office", "the coffee shop", "the client\'s office", and "the bar" — though, depending on where you are located currently, some of those options may not be accessible.\n\n' + $scope.prompt;
+	    }
+	
+	    // buy replies
+	
+	    function next(locationObj) {
+	      return '' + locationObj.prompts[++locationObj.promptIndex];
+	    }
+	
+	    function buySuccess(item, cost, locationObj) {
+	      $scope.balance -= cost;
+	      $scope.prompt = 'Success! You bought a small ' + item + ' for $' + cost + ', you\'re now down to a balance of $' + $scope.balance + '. Ahhh, that ' + item + ' really hits the spot...' + next(locationObj) + '\n\n' + $scope.prompt;
+	    }
+	
+	    function buyFail(item, cost) {
+	      $scope.prompt = 'Bummer! You don\'t have enough money for a $' + cost + ' ' + item + ', you\'re currently down to a balance of $' + $scope.balance + '.\n\n' + $scope.prompt;
+	    }
+	
+	    function buyWrong(item, cost) {
+	      $scope.prompt = 'That isn\'t available here, but I do imagine they\'ll have ' + item + '! You\'ve got a balance of $' + $scope.balance + ' and each ' + item + ' costs $' + cost + ', spend wisely...\n\n' + $scope.prompt;
+	    }
+	
+	    function nothingToBuy() {
+	      $scope.prompt = 'This isn\'t a location where you can really buy things. Save your money and get on with the tasks at hand...\n\n' + $scope.prompt;
+	    }
+	
+	    // use replies
+	
+	    function notUseful() {
+	      $scope.prompt = 'I don\'t think that\'s going to be terribly useful. Let\'s just ignore this minor transgression and keep going...\n\n' + $scope.prompt;
+	    }
+	
+	    // get replies
+	
+	    function nothingToGet() {
+	      $scope.prompt = 'There\'s nothing to get at this point in the game. We\'ll just ignore this minor transgression and keep going...\n\n' + $scope.prompt;
+	    }
+	
+	    function getSuccess(item, response) {
+	      $scope.inventory[item] = true;
+	      $scope.prompt = 'Success! You\'ve snagged the ' + item + ' and added it to your inventory--' + response + '...\n\n' + $scope.prompt;
+	    }
+	
+	    // function getFail() {
+	    //
+	    // }
+	
 	
 	    if (input.includes('go')) {
-	      // find current location
 	      for (var b = 0; b < locationStringArray.length; b++) {
 	        if (locationStringArray[b].current == true) {
-	          // iterate through the locations they can travel to tos current location
 	          for (var c = 0; c < locationStringArray[b].tos.length; c++) {
-	            var newLoc = locationStringArray[b].tos[c];
-	            // if they've entered a location that matches one accessible tos their current location...
-	            if (input.includes(newLoc.string)) {
-	              return $scope.resetLoc(newLoc);
+	            var newLocation = locationStringArray[b].tos[c];
+	            if (input.includes(newLocation.string)) {
+	              $scope.resetLoc(newLocation);
+	              return $scope.prompt = newLocation.prompts[++newLocation.promptIndex] + '\n\n' + $scope.prompt;
 	            }
-	            // if they've entered a location that matches one that isn't accessible tos their current location...
-	            else {
-	                return $scope.prompt = 'You can\'t go there. The locations you can choose from are "my office", "the coffee shop", "the client\'s office", and "the bar" — though, depending on where you are located currently, some of those options may not be accessible.\n\n' + $scope.prompt;
-	              }
 	          }
-	        } else {
-	          // for whatever reason, if something goes wrong, log an error in the console...
-	          console.error();'something went wrong';
-	        }
+	          return cantGoThere();
+	        } else console.error();'there isn\'t a current location...';
 	      }
 	    } else if (input.includes('buy')) {
 	      if ($scope.currentLoc == coffee.output) {
-	        if (input.includes('coffee')) {
-	          if ($scope.balance < 3) {
-	            $scope.prompt = 'Bummer! You don\'t have enough money for a $3 coffee, you\'re currently down to a balance of $' + $scope.balance + '.\n\n' + $scope.prompt;
-	          } else {
-	            $scope.balance -= 3;
-	            $scope.prompt = 'Success! You bought a small coffee for $3, you\'re now down to a balance of $' + $scope.balance + '.\n\n' + $scope.prompt;
-	          }
-	        } else {
-	          $scope.prompt = 'That isn\'t available here, but I do imagine they\'ll have coffee! You\'ve got a balance of $' + $scope.balance + ' and each coffee costs $3, spend wisely...\n\n' + $scope.prompt;
+	        var item = 'coffee';
+	        var cost = 3;
+	        if (input.includes(item)) {
+	          if ($scope.balance < cost) return buyFail(item, cost);else return buySuccess(item, cost, coffee);
+	        } else return buyWrong(item, cost);
+	      } else if ($scope.currentLoc == bar.output) {
+	        var _item = 'beer';
+	        var _cost = 5;
+	        // let next = `${bar.prompts[++bar.promptIndex]}`;
+	        if (input.includes(_item)) {
+	          if ($scope.balance < _cost) return buyFail(_item, _cost);else return buySuccess(_item, _cost, bar);
+	        } else return buyWrong(_item, _cost);
+	      } else return nothingToBuy();
+	    } else if (input.includes('get')) {
+	      if ($scope.currentLoc == office.output) {
+	        if (office.promptIndex === 0) {
+	          if (input.includes('attachment')) return getSuccess('attachment', 'Now would be as good a time to read it as any...');else return notUseful();
+	        } else return nothingToGet();
+	      } else if ($scope.currentLoc == coffee.output) {
+	        if (coffee.promptIndex === 1) {
+	          if (input.includes('spec')) return getSuccess('spec', 'Now comes the hard part...' + next(coffee));else return notUseful();
 	        }
+	        if (coffee.promptIndex === 2) {
+	          if (input.includes('contract')) return getSuccess('contract', 'That concludes our meeting, guess we should get over to the client\'s office to meet the rest of the team.');
+	        } else return nothingToGet();
+	      } else if ($scope.currentLoc == client.output) {
+	        if (client.promptIndex === 1) {
+	          if (input.includes('check')) return getSuccess('check', 'Check out all those zeroes!');
+	        }
+	      } else return nothingToGet();
+	    } else if (input.includes('use')) {
+	      if (input.includes('attachment')) {
+	        $scope.inventory.attachment = false;
+	        $scope.prompt = office.prompts[++office.promptIndex] + '\n\n' + $scope.prompt;
+	      } else if (input.includes('book')) {
+	        $scope.inventory.book = false;
+	        $scope.prompt = office.prompts[++office.promptIndex] + '\n\n' + $scope.prompt;
+	      } else if (input.includes('music')) {
+	        $scope.inventory.music = false;
+	        $scope.prompt = office.prompts[++office.promptIndex] + '\n\n' + $scope.prompt;
+	      } else if (input.includes('spec')) {
+	        $scope.inventory.spec = false;
+	        $scope.prompt = client.prompts[++client.promptIndex] + '\n\n' + $scope.prompt;
+	      } else if (input.includes('contract')) {
+	        $scope.inventory.contract = false;
+	        $scope.prompt = client.prompts[++client.promptIndex] + '\n\n' + $scope.prompt;
+	      } else if (input.includes('check')) {
+	        $scope.inventory.check = false;
+	        $scope.prompt = client.prompts[++client.promptIndex] + '\n\n' + $scope.prompt;
 	      } else {
-	        console.log('nah');
+	        $scope.prompt = 'You can\'t **use** that, you don\'t **have** that. Let\'s try something else...\n\n' + $scope.prompt;
 	      }
+	    } else {
+	      $scope.prompt = 'I don\'t understand what you\'re trying to do. Let\'s try something else...\n\n' + $scope.prompt;
 	    }
-	
-	    // else if (input.includes('buy')) {
-	    //   if ($scope.location == 'the coffee shop') {
-	    //     if (input.includes('coffee')) {
-	    //       $scope.balance -= 3;
-	    //       $scope.prompt += '\n\nSuccess! You bought a coffee for $3, you\'re now down to $' + $scope.balance;
-	    //     }
-	    //     else {
-	    //       $scope.prompt += '\n\nThey don\'t serve that here, but they do serve COFFEE';
-	    //     }
-	    //   }
-	    //   else if ($scope.location == 'the bar') {
-	    //     if (input.includes('beer')) {
-	    //       $scope.balance -= 5;
-	    //       $scope.prompt += '\n\nSuccess! You bought a beer for $5, you\'re now down to $' + $scope.balance;
-	    //     }
-	    //     else {
-	    //       $scope.prompt += '\n\nThey don\'t serve that here, but they do serve BEER';
-	    //     }
-	    //   }
-	    //   else {
-	    //     $scope.prompt += '\n\nThere\'s nothing to buy here...';
-	    //   }
-	    // }
-	    // // if nothing else...
-	    // else {
-	    //   $scope.prompt += '\n\nI don\'t know what that means...Try a different request.';
-	    // }
-	
 	  };
 	}
 
@@ -32145,7 +32221,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/* --------------- UNIVERSAL --------------- */\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'source sans pro', helvetica, arial, sans-serif;\n}\n\nbody {\n  background-color: #eee;\n}\n\n.shadow {\n  -webkit-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  -moz-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  -ms-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  -o-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n}\n\nbutton {\n  display: inline-block;\n  background-color: transparent;\n  border: 1px solid #000;\n  border-radius: 25px;\n  padding: 5px 5px;\n  text-align: center;\n  width: 100px;\n  margin-left: 20px;\n  outline: none;\n}\n\nbutton:hover {\n  border: 1px solid #000;\n  background-color: #e0e0e0;\n  color: #000;\n  outline: none;\n}\n\np {\n  text-align: justify;\n}\n\n/* --------------- HEADER --------------- */\n\n#logo {\n  height: 75px;\n  width: 100%;\n  position: relative;\n  top: 0;\n  left: 0;\n  background-image: url('http://static.tumblr.com/7bljswk/yHQm2pths/logo.png');\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: 250px;\n  z-index: 1000;\n}\n\nnav {\n  width: 100%;\n  position: relative;\n  top: -25px;\n  left: 0;\n  border-top: 1px solid #ccc;\n  background-color: #ccc;\n  text-align: center;\n  font-size: 10px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n\nh3 {\n  padding: 2px 0 3px 40px;\n  font-weight: 400;\n  display: inline-block;\n  color: #000;\n}\n\n/* --------------- MAIN --------------- */\n\nmain {\n  width: 60%;\n  max-width: 800px;\n  min-width: 500px;\n  margin: 0 auto 100px auto;\n}\n\nsection {\n  margin-bottom: 30px;\n}\n\ninput {\n  background-color: transparent;\n  border: transparent;\n  border-bottom: 1px solid black;\n  font-size: 1.5em;\n  margin: 10px 0;\n  display: inline-block;;\n  width: calc(99% - 122px);\n  outline: none;\n}\n\n/* --------------- FOOTER --------------- */\n\nfooter {\n  width: 100%;\n  background-color: #ccc;\n  position: fixed;\n  bottom: 0;\n}\n\n.inventory, .balance {\n  display: inline-block;\n  width: 40%;\n  position: relative;\n  top: 0;\n  margin: 10px 4%;\n}\n\n.inventory {\n  left: 0;\n}\n\n.balance {\n  right: 0;\n  text-align: right;\n}\n", "", {"version":3,"sources":["/./src/css/main.css"],"names":[],"mappings":"AAAA,+CAA+C;AAC/C;EACE,UAAU;EACV,WAAW;EACX,uBAAuB;EACvB,6DAA6D;CAC9D;;AAED;EACE,uBAAuB;CACxB;;AAED;EACE,wDAAwD;EACxD,qDAAqD;EACrD,oDAAoD;EACpD,mDAAmD;EACnD,gDAAgD;CACjD;;AAED;EACE,sBAAsB;EACtB,8BAA8B;EAC9B,uBAAuB;EACvB,oBAAoB;EACpB,iBAAiB;EACjB,mBAAmB;EACnB,aAAa;EACb,kBAAkB;EAClB,cAAc;CACf;;AAED;EACE,uBAAuB;EACvB,0BAA0B;EAC1B,YAAY;EACZ,cAAc;CACf;;AAED;EACE,oBAAoB;CACrB;;AAED,4CAA4C;;AAE5C;EACE,aAAa;EACb,YAAY;EACZ,mBAAmB;EACnB,OAAO;EACP,QAAQ;EACR,6EAA6E;EAC7E,6BAA6B;EAC7B,4BAA4B;EAC5B,uBAAuB;EACvB,cAAc;CACf;;AAED;EACE,YAAY;EACZ,mBAAmB;EACnB,WAAW;EACX,QAAQ;EACR,2BAA2B;EAC3B,uBAAuB;EACvB,mBAAmB;EACnB,gBAAgB;EAChB,0BAA0B;EAC1B,oBAAoB;CACrB;;AAED;EACE,wBAAwB;EACxB,iBAAiB;EACjB,sBAAsB;EACtB,YAAY;CACb;;AAED,0CAA0C;;AAE1C;EACE,WAAW;EACX,iBAAiB;EACjB,iBAAiB;EACjB,0BAA0B;CAC3B;;AAED;EACE,oBAAoB;CACrB;;AAED;EACE,8BAA8B;EAC9B,oBAAoB;EACpB,+BAA+B;EAC/B,iBAAiB;EACjB,eAAe;EACf,sBAAsB;EACtB,yBAAyB;EACzB,cAAc;CACf;;AAED,4CAA4C;;AAE5C;EACE,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;EAChB,UAAU;CACX;;AAED;EACE,sBAAsB;EACtB,WAAW;EACX,mBAAmB;EACnB,OAAO;EACP,gBAAgB;CACjB;;AAED;EACE,QAAQ;CACT;;AAED;EACE,SAAS;EACT,kBAAkB;CACnB","file":"main.css","sourcesContent":["/* --------------- UNIVERSAL --------------- */\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'source sans pro', helvetica, arial, sans-serif;\n}\n\nbody {\n  background-color: #eee;\n}\n\n.shadow {\n  -webkit-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  -moz-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  -ms-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  -o-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n  filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));\n}\n\nbutton {\n  display: inline-block;\n  background-color: transparent;\n  border: 1px solid #000;\n  border-radius: 25px;\n  padding: 5px 5px;\n  text-align: center;\n  width: 100px;\n  margin-left: 20px;\n  outline: none;\n}\n\nbutton:hover {\n  border: 1px solid #000;\n  background-color: #e0e0e0;\n  color: #000;\n  outline: none;\n}\n\np {\n  text-align: justify;\n}\n\n/* --------------- HEADER --------------- */\n\n#logo {\n  height: 75px;\n  width: 100%;\n  position: relative;\n  top: 0;\n  left: 0;\n  background-image: url('http://static.tumblr.com/7bljswk/yHQm2pths/logo.png');\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: 250px;\n  z-index: 1000;\n}\n\nnav {\n  width: 100%;\n  position: relative;\n  top: -25px;\n  left: 0;\n  border-top: 1px solid #ccc;\n  background-color: #ccc;\n  text-align: center;\n  font-size: 10px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n\nh3 {\n  padding: 2px 0 3px 40px;\n  font-weight: 400;\n  display: inline-block;\n  color: #000;\n}\n\n/* --------------- MAIN --------------- */\n\nmain {\n  width: 60%;\n  max-width: 800px;\n  min-width: 500px;\n  margin: 0 auto 100px auto;\n}\n\nsection {\n  margin-bottom: 30px;\n}\n\ninput {\n  background-color: transparent;\n  border: transparent;\n  border-bottom: 1px solid black;\n  font-size: 1.5em;\n  margin: 10px 0;\n  display: inline-block;;\n  width: calc(99% - 122px);\n  outline: none;\n}\n\n/* --------------- FOOTER --------------- */\n\nfooter {\n  width: 100%;\n  background-color: #ccc;\n  position: fixed;\n  bottom: 0;\n}\n\n.inventory, .balance {\n  display: inline-block;\n  width: 40%;\n  position: relative;\n  top: 0;\n  margin: 10px 4%;\n}\n\n.inventory {\n  left: 0;\n}\n\n.balance {\n  right: 0;\n  text-align: right;\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "/* --------------- UNIVERSAL --------------- */\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'source sans pro', helvetica, arial, sans-serif;\n}\n\nbody {\n  background-color: #eee;\n}\n\nbutton {\n  display: inline-block;\n  background-color: transparent;\n  border: 1px solid #000;\n  border-radius: 25px;\n  padding: 5px 5px;\n  text-align: center;\n  width: 100px;\n  margin-left: 20px;\n  outline: none;\n}\n\nbutton:hover {\n  border: 1px solid #000;\n  background-color: #e0e0e0;\n  color: #000;\n  outline: none;\n}\n\np {\n  text-align: justify;\n  font-weight: 300;\n  font-size: 1.25em;\n}\n\n/* --------------- HEADER --------------- */\n\n#logo {\n  height: 75px;\n  width: 100%;\n  position: relative;\n  top: 0;\n  text-align: center;\n  padding: 5px 10px;\n  font-size: 2em;\n  text-transform: uppercase;\n  font-weight: 300;\n}\n\nnav {\n  width: 100%;\n  position: relative;\n  top: -25px;\n  left: 0;\n  border-top: 1px solid #ccc;\n  background-color: #ccc;\n  text-align: center;\n  font-size: 10px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n\nh2 {\n  font-weight: 400;\n  text-transform: uppercase;\n}\n\nh3 {\n  padding: 2px 0 3px 0;\n  font-weight: 400;\n  display: inline-block;\n  color: #000;\n}\n\nh5 {\n  font-weight: 300;\n  font-size: 1.25em;\n  text-transform: uppercase;\n  text-align: center;\n  padding: 5px 10px;\n}\n\n/* --------------- MAIN --------------- */\n\nmain {\n  width: 60%;\n  max-width: 800px;\n  min-width: 500px;\n  margin: 0 auto 100px auto;\n}\n\nsection {\n  margin-bottom: 150px;\n}\n\ninput {\n  background-color: transparent;\n  border: transparent;\n  border-bottom: 1px solid black;\n  font-size: 1.5em;\n  font-weight: 300;\n  margin: 10px 0;\n  display: inline-block;;\n  width: calc(99% - 122px);\n  outline: none;\n}\n\n/* --------------- FOOTER --------------- */\n\nfooter {\n  width: 100%;\n  background-color: #ccc;\n  position: fixed;\n  bottom: 0;\n  padding: 20px;\n}\n", "", {"version":3,"sources":["/./src/css/main.css"],"names":[],"mappings":"AAAA,+CAA+C;AAC/C;EACE,UAAU;EACV,WAAW;EACX,uBAAuB;EACvB,6DAA6D;CAC9D;;AAED;EACE,uBAAuB;CACxB;;AAED;EACE,sBAAsB;EACtB,8BAA8B;EAC9B,uBAAuB;EACvB,oBAAoB;EACpB,iBAAiB;EACjB,mBAAmB;EACnB,aAAa;EACb,kBAAkB;EAClB,cAAc;CACf;;AAED;EACE,uBAAuB;EACvB,0BAA0B;EAC1B,YAAY;EACZ,cAAc;CACf;;AAED;EACE,oBAAoB;EACpB,iBAAiB;EACjB,kBAAkB;CACnB;;AAED,4CAA4C;;AAE5C;EACE,aAAa;EACb,YAAY;EACZ,mBAAmB;EACnB,OAAO;EACP,mBAAmB;EACnB,kBAAkB;EAClB,eAAe;EACf,0BAA0B;EAC1B,iBAAiB;CAClB;;AAED;EACE,YAAY;EACZ,mBAAmB;EACnB,WAAW;EACX,QAAQ;EACR,2BAA2B;EAC3B,uBAAuB;EACvB,mBAAmB;EACnB,gBAAgB;EAChB,0BAA0B;EAC1B,oBAAoB;CACrB;;AAED;EACE,iBAAiB;EACjB,0BAA0B;CAC3B;;AAED;EACE,qBAAqB;EACrB,iBAAiB;EACjB,sBAAsB;EACtB,YAAY;CACb;;AAED;EACE,iBAAiB;EACjB,kBAAkB;EAClB,0BAA0B;EAC1B,mBAAmB;EACnB,kBAAkB;CACnB;;AAED,0CAA0C;;AAE1C;EACE,WAAW;EACX,iBAAiB;EACjB,iBAAiB;EACjB,0BAA0B;CAC3B;;AAED;EACE,qBAAqB;CACtB;;AAED;EACE,8BAA8B;EAC9B,oBAAoB;EACpB,+BAA+B;EAC/B,iBAAiB;EACjB,iBAAiB;EACjB,eAAe;EACf,sBAAsB;EACtB,yBAAyB;EACzB,cAAc;CACf;;AAED,4CAA4C;;AAE5C;EACE,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;EAChB,UAAU;EACV,cAAc;CACf","file":"main.css","sourcesContent":["/* --------------- UNIVERSAL --------------- */\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'source sans pro', helvetica, arial, sans-serif;\n}\n\nbody {\n  background-color: #eee;\n}\n\nbutton {\n  display: inline-block;\n  background-color: transparent;\n  border: 1px solid #000;\n  border-radius: 25px;\n  padding: 5px 5px;\n  text-align: center;\n  width: 100px;\n  margin-left: 20px;\n  outline: none;\n}\n\nbutton:hover {\n  border: 1px solid #000;\n  background-color: #e0e0e0;\n  color: #000;\n  outline: none;\n}\n\np {\n  text-align: justify;\n  font-weight: 300;\n  font-size: 1.25em;\n}\n\n/* --------------- HEADER --------------- */\n\n#logo {\n  height: 75px;\n  width: 100%;\n  position: relative;\n  top: 0;\n  text-align: center;\n  padding: 5px 10px;\n  font-size: 2em;\n  text-transform: uppercase;\n  font-weight: 300;\n}\n\nnav {\n  width: 100%;\n  position: relative;\n  top: -25px;\n  left: 0;\n  border-top: 1px solid #ccc;\n  background-color: #ccc;\n  text-align: center;\n  font-size: 10px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n\nh2 {\n  font-weight: 400;\n  text-transform: uppercase;\n}\n\nh3 {\n  padding: 2px 0 3px 0;\n  font-weight: 400;\n  display: inline-block;\n  color: #000;\n}\n\nh5 {\n  font-weight: 300;\n  font-size: 1.25em;\n  text-transform: uppercase;\n  text-align: center;\n  padding: 5px 10px;\n}\n\n/* --------------- MAIN --------------- */\n\nmain {\n  width: 60%;\n  max-width: 800px;\n  min-width: 500px;\n  margin: 0 auto 100px auto;\n}\n\nsection {\n  margin-bottom: 150px;\n}\n\ninput {\n  background-color: transparent;\n  border: transparent;\n  border-bottom: 1px solid black;\n  font-size: 1.5em;\n  font-weight: 300;\n  margin: 10px 0;\n  display: inline-block;;\n  width: calc(99% - 122px);\n  outline: none;\n}\n\n/* --------------- FOOTER --------------- */\n\nfooter {\n  width: 100%;\n  background-color: #ccc;\n  position: fixed;\n  bottom: 0;\n  padding: 20px;\n}\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -32462,7 +32538,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n  <div id=\"logo\" class=\"shadow\" ng-click=\"reset()\"><!-- img --></div>\n  <nav>\n    <h3 ng-click=\"reset()\">Reset Game</h3>\n  </nav>\n</header>\n\n<main>\n    <section>\n      <h2 ng-show=\"hasName\">You are at {{currentLoc}}</h2>  <!-- office, coffee shop, client office, bar -->\n      <div class=\"responses\">\n        <input ng-show=\"!hasName\" ng-model=\"name\" placeholder=\"what is your name?\"></input>\n        <button ng-show=\"!hasName\" ng-click=\"submitName()\">Enter</button>\n\n        <input ng-show=\"hasName\" ng-model=\"input\" placeholder=\"what do you want to do next?\"></input>\n        <button ng-show=\"hasName\" ng-click=\"submit()\">Enter</button>\n      </div>\n      <p style=\"white-space:pre-wrap;\">{{prompt}}</p>\n    </section>\n  </main>\n\n  <footer>\n    <div class=\"inventory\">\n      {{displayInv()}}\n    </div>\n    <div class=\"balance\">\n      {{displayBal()}}\n    </div>\n  </footer>\n";
+	module.exports = "<header>\n  <div id=\"logo\" ng-click=\"reset()\">Freelancer's Fury</div>\n  <nav>\n    <h3 ng-click=\"reset()\">Reset Game</h3>\n  </nav>\n</header>\n\n<main>\n    <section>\n      <h2 ng-show=\"hasName\">You are at {{currentLoc}}</h2>  <!-- office, coffee shop, client office, bar -->\n      <div class=\"responses\">\n        <input ng-show=\"!hasName\" ng-model=\"name\" placeholder=\"what is your name?\"></input>\n        <button ng-show=\"!hasName\" ng-click=\"submitName()\">Enter</button>\n\n        <input ng-show=\"hasName\" ng-model=\"input\" placeholder=\"Commands : 'get', 'go to', 'use', or 'buy'\" onblur=\"this.focus()\" autofocus></input>\n        <button ng-show=\"hasName\" ng-click=\"submit()\">Enter</button>\n      </div>\n      <p style=\"white-space:pre-wrap;\">{{prompt}}</p>\n    </section>\n  </main>\n\n  <footer>\n    <h5>{{displayInv()}}</h5>\n    <h5>{{displayBal()}}</h5>\n  </footer>\n";
 
 /***/ }
 /******/ ]);
