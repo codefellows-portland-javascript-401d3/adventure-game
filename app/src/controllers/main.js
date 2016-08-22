@@ -13,7 +13,6 @@ export default function main($scope) {
   };
 
   $scope.$watch('[room, cake]', function() {
-    console.log('watch works!');
     if($scope.room === `desk`) {
       $scope.class = `six-columns`;
     } else if ($scope.room === 'breakroom') {
