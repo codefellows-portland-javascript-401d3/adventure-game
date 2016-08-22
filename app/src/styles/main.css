@@ -1,0 +1,14 @@
+
+.six-columns {
+  width: 48%;
+  margin-right: 2%;
+  float: left;
+  box-sizing: border-box;
+}
+
+.four-columns {
+  width: 30.6%;
+  margin-right: 2%;
+  float: left;
+  box-sizing: border-box;
+}
