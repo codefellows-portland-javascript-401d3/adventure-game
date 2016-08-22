@@ -46,385 +46,33 @@
 
 	'use strict';
 	
-	__webpack_require__(1);
-	
-	var _angular = __webpack_require__(5);
+	var _angular = __webpack_require__(1);
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _app = __webpack_require__(7);
+	var _app = __webpack_require__(3);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _controller = __webpack_require__(8);
+	var _app3 = __webpack_require__(12);
 	
-	var _controller2 = _interopRequireDefault(_controller);
+	var _app4 = _interopRequireDefault(_app3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var app = _angular2.default.module('myApp', [_controller2.default]);
-	
-	document.body.innerHTML = _app2.default;
-	_angular2.default.bootstrap(document, [app.name]);
+	document.body.innerHTML = _app4.default;
+	_angular2.default.bootstrap(document, [_app2.default]);
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(2);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js?sourceMap!./main.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js?sourceMap!./main.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "h1 {\n  color: steelblue;\n}\n\n/*body {\n  font-family: 'VT323', monospace;\n}\n\nbody {\n  font-family: 'Special Elite', cursive;\n}*/\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 1.5rem;\n}\n\nbutton {\n  font-family: 'VT323', monospace;\n  font-size: 1.5rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 1.5rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 1.5rem;\n}\n", "", {"version":3,"sources":["/./app/src/main.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;CAClB;;AAED;;;;;;GAMG;;AAEH;EACE,sCAAsC;EACtC,kBAAkB;CACnB;;AAED;EACE,gCAAgC;EAChC,kBAAkB;CACnB;;AAED;EACE,sCAAsC;EACtC,kBAAkB;CACnB;;AAED;EACE,sCAAsC;EACtC,kBAAkB;CACnB","file":"main.css","sourcesContent":["h1 {\n  color: steelblue;\n}\n\n/*body {\n  font-family: 'VT323', monospace;\n}\n\nbody {\n  font-family: 'Special Elite', cursive;\n}*/\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 1.5rem;\n}\n\nbutton {\n  font-family: 'VT323', monospace;\n  font-size: 1.5rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 1.5rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 1.5rem;\n}\n"],"sourceRoot":"webpack://"}]);
-	
-	// exports
-
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-	
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-	
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-	
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-	
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-	
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-	
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-	
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-	
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-	
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-	
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-	
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
-	
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-	
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-	
-		update(obj);
-	
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-	
-	var replaceText = (function () {
-		var textStore = [];
-	
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-	
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-	
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-	
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-	
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-	
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-	
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var sourceMap = obj.sourceMap;
-	
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-	
-		var blob = new Blob([css], { type: "text/css" });
-	
-		var oldSrc = linkElement.href;
-	
-		linkElement.href = URL.createObjectURL(blob);
-	
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(6);
+	__webpack_require__(2);
 	module.exports = angular;
 
 
 /***/ },
-/* 6 */
+/* 2 */
 /***/ function(module, exports) {
 
 	/**
@@ -32197,10 +31845,376 @@
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 7 */
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	__webpack_require__(4);
+	
+	var _angular = __webpack_require__(1);
+	
+	var _angular2 = _interopRequireDefault(_angular);
+	
+	var _controller = __webpack_require__(8);
+	
+	var _controller2 = _interopRequireDefault(_controller);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _angular2.default.module('myApp', [_controller2.default]).name;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(5);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js?sourceMap!./main.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js?sourceMap!./main.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "h1 {\n  color: steelblue;\n  margin-top: 2%;\n  margin-left: 2%;\n}\n\n/*body {\n  font-family: 'VT323', monospace;\n}\n\nbody {\n  font-family: 'Special Elite', cursive;\n}*/\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n", "", {"version":3,"sources":["/./app/src/main.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,eAAe;EACf,gBAAgB;CACjB;;AAED;;;;;;GAMG;;AAEH;EACE,sCAAsC;EACtC,gBAAgB;CACjB;;AAED;EACE,sCAAsC;EACtC,gBAAgB;CACjB;;AAED;EACE,sCAAsC;EACtC,gBAAgB;CACjB","file":"main.css","sourcesContent":["h1 {\n  color: steelblue;\n  margin-top: 2%;\n  margin-left: 2%;\n}\n\n/*body {\n  font-family: 'VT323', monospace;\n}\n\nbody {\n  font-family: 'Special Elite', cursive;\n}*/\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1> Controllers </h1>\n\n<div ng-controller=\"game\">\n\n  <ul>Game Commands:\n    <li ng-show=\"gameCommands\" ng-repeat=\"gameCommand in gameCommands\">{{gameCommand}}</li>\n  </ul>\n\n  <label>Command: <input type=\"text\" ng-model=\"input\">\n\n  <p>Game Status: {{getStatus()}}\n\n  <button ng-click=\"act(input)\">Make Move</button>\n  \n  <div ng-controller=\"player\">\n    <p>Player Status: {{getPlayerStatus()}}\n  </div>\n\n  <div ng-controller=\"location\">\n    <p>Location: {{}}\n  </div>\n\n</div>\n\n<!-- <div ng-controller=\"counter\">\n  {{count}}\n  <button ng-click=\"add()\">Add</button>\n  <input ng-keydown=\"checkEvent($event)\" ng-init=\"num=0\">\n  <div>Keydown Count is: {{num}}\n  <div>\n    Half Count is: {{half(count)}}\n  </div>\n</div>\n\n<div ng-controller=\"cowsay\">\n  <select ng-model=\"type\" ng-options=\"type for type in types\"></select>\n  <label>\n    <input type=\"radio\" ng-model=\"method\" value=\"say\">\n    Say\n  </label>\n  <label>\n    <input type=\"radio\" ng-model=\"method\" value=\"think\">\n    Think\n  </label>\n  <input type=\"text\" ng-model=\"text\">\n  <pre>{{say(type, method, text)}}</pre>\n  <ul>\n    <li ng-show=\"type.startsWith('d')\" ng-repeat=\"type in types\">{{type}}</li>\n  </ul>\n</div> -->\n";
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+	
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+	
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+	
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+	
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+	
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+	
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+	
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+	
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+	
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+	
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+	
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+	
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+	
+		update(obj);
+	
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+	
+	var replaceText = (function () {
+		var textStore = [];
+	
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+	
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+	
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+	
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+	
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+	
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+	
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+	
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+	
+		var blob = new Blob([css], { type: "text/css" });
+	
+		var oldSrc = linkElement.href;
+	
+		linkElement.href = URL.createObjectURL(blob);
+	
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
 
 /***/ },
 /* 8 */
@@ -32212,871 +32226,327 @@
 	  value: true
 	});
 	
-	var _angular = __webpack_require__(5);
+	var _angular = __webpack_require__(1);
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _counter = __webpack_require__(9);
+	var _game = __webpack_require__(9);
 	
-	var _counter2 = _interopRequireDefault(_counter);
+	var _game2 = _interopRequireDefault(_game);
 	
-	var _cowsay = __webpack_require__(10);
+	var _player = __webpack_require__(11);
 	
-	var _cowsay2 = _interopRequireDefault(_cowsay);
+	var _player2 = _interopRequireDefault(_player);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var _module = _angular2.default.module('controllers', []);
 	
-	_module.controller('counter', _counter2.default);
-	_module.controller('cowsay', _cowsay2.default);
+	_module.controller('game', _game2.default);
+	_module.controller('player', _player2.default);
 	
 	exports.default = _module.name;
 
 /***/ },
 /* 9 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = counter;
-	function counter($scope, $timeout) {
-	  $scope.count = 0;
+	exports.default = game;
 	
-	  $scope.num = 0;
+	var _user = __webpack_require__(10);
 	
-	  $scope.checkEvent = function ($event) {
-	    if ($event.key === 'Enter') console.log($event);else console.log('You must hit the return button.');
+	function game($scope) {
+	
+	  $scope.init = 'Enter Commands Here.';
+	  $scope.message = null;
+	  $scope.gameState = null;
+	  $scope.gameCommands = ['forward', 'back', 'drop', 'grab', 'use', 'grab: item', 'make sandwich'];
+	
+	  $scope.rooms = {};
+	
+	  $scope.rooms.hallway = {
+	    name: 'hallway',
+	    visited: 0,
+	    items: [],
+	    initial: 'You are in a hallway in a house. It\'s dark. There is a door to the living room next to you. Really, your only option is to go forward, so just do that.',
+	    beenHere: 'Back in the hallway? Come on, it\'s a hallway. Get over it already.'
 	  };
 	
-	  $scope.add = function () {
-	    $scope.count++;
+	  $scope.rooms.living = {
+	    name: 'living room',
+	    visited: 0,
+	    items: ['pouch'],
+	    initial: 'You are in the living room. There is a door to the west and a pouch on the floor. What would you like to do?',
+	    beenHere: 'Back in the living room. Anything interesting in here?',
+	    pickup: 'You pick up the pouch and stash for use later. Now what?'
 	  };
 	
-	  $scope.half = function (num) {
-	    return num / 2;
+	  $scope.rooms.dining = {
+	    name: 'dining room',
+	    visited: 0,
+	    items: ['deli meat'],
+	    enemy: 'Panther',
+	    initial: 'You enter the dining room. A panther rests in a doorway that leads to the kitchen. Some delicious looking deli meat sits on the table. What now?',
+	    noEnemy: 'Back in the dining room. Panther still seems satiated. Where to? Maybe to the kitchen?',
+	    leaveEarly: 'You attempt to walk past the panther into the kitchen. The panther gets angry and eats you and the delicious deli meat that was on the table. Too bad!',
+	    feed: 'You offer the deli meat to the panther, and it seems content. But too bad, now no lunch meat for you. What next?'
 	  };
 	
-	  $timeout(function () {
-	    $scope.add();
-	  }, 1000);
+	  $scope.rooms.kitchen = {
+	    name: 'kitchen',
+	    visited: 0,
+	    items: ['steak knife'],
+	    enemy: 'Lion',
+	    initial: 'You are now in the kitchen. It appears as though there is a lion at the other end of the room. There is a steak knife on the counter. There is fresh bread and sandwich fixings on the island, including more lunch meat! What would you like to do?',
+	    noEnemy: 'You are back in the kitchen. The lion is still enjoying the catnip. How \'bout that sandwich?',
+	    pouch: 'You open the pouch and pour out a large amount of catnip. The lion is very happy and no longer seems interested in you. Now what?',
+	    knife: 'You attempt to fight the lion with the steak knife, but come on, it\'s a lion! You are devoured. You lose.',
+	    leaveEarly: 'You make a sandwich and the lion that was sleeping on the other side of the room comes over. It eats you and your sandwich.',
+	    win: 'You make a sandwich and head out to the beach. Nice Work!'
+	  };
+	
+	  $scope.rooms.hallway.forward = $scope.rooms.living;
+	  $scope.rooms.hallway.back = null;
+	  $scope.rooms.living.forward = $scope.rooms.dining;
+	  $scope.rooms.living.back = $scope.rooms.hallway;
+	  $scope.rooms.dining.forward = $scope.rooms.kitchen;
+	  $scope.rooms.dining.back = $scope.rooms.living;
+	  $scope.rooms.kitchen.forward = null;
+	  $scope.rooms.kitchen.back = $scope.rooms.dining;
+	
+	  $scope.user = new _user.User({
+	    location: $scope.rooms.hallway,
+	    items: [],
+	    alive: true
+	  });
+	
+	  $scope.gameState = $scope.user.location.initial;
+	  $scope.current = $scope.user.location.name;
+	  $scope.user.location.visited++;
+	
+	  $scope.gameSettings = {
+	    completed: false,
+	    won: false
+	  };
+	
+	  $scope.checkEvent = function ($event, callback) {
+	    if ($event.key === 'Enter') {
+	      callback($event.target.value);
+	      $event.target.value = null;
+	    }
+	  };
+	
+	  $scope.getStatus = function () {
+	    return $scope.gameSettings.completed ? 'Game Completed.' : 'In Progress...';
+	  };
+	
+	  $scope.getEnd = function () {
+	    $scope.gameState = null;
+	    return $scope.gameSettings.won ? 'You win!' : 'You lost emphatically.';
+	  };
+	
+	  $scope.getPlayerStatus = function () {
+	    return $scope.user.alive ? 'Alive and Well.' : 'Not Looking Good.';
+	  };
+	
+	  $scope.setCurrent = function (dir) {
+	    var room = $scope.user.location;
+	    if (room.enemy && dir === 'forward') {
+	      $scope.gameSettings.completed = true;
+	      $scope.user.alive = false;
+	      $scope.message = room.leaveEarly;
+	    } else {
+	      return $scope.user.travel(dir);
+	    }
+	  };
+	
+	  $scope.showEnemies = function () {
+	    var room = $scope.user.location;
+	    return room.enemy ? room.enemy : 'No enemies in this room.';
+	  };
+	
+	  $scope.showItems = function () {
+	    var room = $scope.user.location;
+	    return room.items.length > 0 ? room.items : 'No items in this room.';
+	  };
 	}
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = cowsay;
 	
-	var _cowsayBrowser = __webpack_require__(11);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _cowsayBrowser2 = _interopRequireDefault(_cowsayBrowser);
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var User = function () {
+	  function User(obj) {
+	    var _this = this;
 	
-	function cowsay($scope) {
+	    _classCallCheck(this, User);
 	
-	  _cowsayBrowser2.default.list(function (err, types) {
-	    $scope.types = types;
-	  });
+	    Object.keys(obj).forEach(function (prop) {
+	      _this[prop] = obj[prop];
+	    }, this);
+	  }
 	
-	  $scope.type = 'default';
-	  $scope.text = 'test text.';
-	  $scope.method = 'think';
+	  _createClass(User, [{
+	    key: 'travel',
+	    value: function travel(dir) {
+	      var output = void 0;
+	      if (this.location[dir]) {
+	        this.location = this.location[dir];
+	      } else {
+	        return 'You cannot go that way.';
+	      }
 	
-	  $scope.say = function (type, method, text) {
-	    return _cowsayBrowser2.default[method]({
-	      text: text || 'MOOOOOOO',
-	      f: type
-	    });
+	      if (this.location.enemy || this.location.visited === 0) {
+	        output = this.location.initial;
+	        this.location.visited++;
+	      } else if (!this.location.enemy && !this.location.noEnemy) {
+	        //check for a 'had item' property that would indicate room once contained an item
+	        //also a check that room had been visited before
+	        this.location.visited > 0 ? (output = this.location.beenHere, this.location.visited++) : (output = this.location.initial, this.location.visited++);
+	      } else {
+	        output = this.location.noEnemy;
+	        this.location.visited++;
+	      }
+	      return output;
+	    }
+	  }]);
+	
+	  return User;
+	}();
+	
+	exports.User = User;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = player;
+	function player($scope) {
+	
+	  $scope.playerAction = function (action) {
+	    var doIt = action;
+	    var item = void 0;
+	    $scope.message = null;
+	    if (action.indexOf(':') > -1) {
+	      doIt = action.split(':')[0].trim();
+	      item = action.split(':')[1].trim();
+	    }
+	
+	    var room = $scope.user.location;
+	    var numItems = room.items.length;
+	
+	    if (doIt === 'forward' || doIt === 'back') {
+	      room[doIt] ? $scope.gameState = $scope.setCurrent(doIt) : $scope.message = 'You cannot go that way.';
+	    } else if (doIt === 'drop') {
+	      $scope.subtractItem();
+	    } else if (doIt === 'grab' && !item) {
+	      $scope.addItem(room.items[numItems - 1]);
+	    } else if (doIt === 'grab' && item) {
+	      $scope.addItem(item);
+	    } else if (doIt === 'use' && $scope.user.items.length > 0) {
+	      $scope.useItem($scope.user.items[0]);
+	    } else if (doIt === 'make sandwich') {
+	      $scope.makeSandwich();
+	    } else {
+	      $scope.message = 'That action is not supported here.';
+	    }
+	  };
+	
+	  $scope.addItem = function (item) {
+	    var room = $scope.user.location;
+	    if (room.items.length === 0) {
+	      $scope.message = 'No items here.';
+	    } else if ($scope.user.items.length === 0) {
+	      var ind = void 0;
+	      var addIt = room.items.find(function (e, i) {
+	        ind = i;
+	        return e === item;
+	      });
+	
+	      $scope.user.items.push(addIt);
+	
+	      room.items.splice(ind, 1);
+	      $scope.message = 'Item added';
+	    } else {
+	      $scope.message = 'Sorry but you already have an item.';
+	    }
+	  };
+	
+	  $scope.subtractItem = function () {
+	    var room = $scope.user.location;
+	    if ($scope.user.items.length === 0) {
+	      $scope.message = 'You have no items to drop.';
+	    } else {
+	      room.items.push($scope.user.items[0]);
+	      $scope.user.items.splice(0, 1);
+	      $scope.message = 'Item dropped.';
+	    }
+	  };
+	
+	  $scope.useItem = function () {
+	    var item = $scope.user.items[0];
+	    var room = $scope.user.location;
+	    if (!item) {
+	      $scope.message = 'You have no items to use.';
+	    } else if (item === 'pouch' && room.name === 'kitchen') {
+	
+	      room.enemy ? ($scope.gameState = room.pouch, $scope.user.items.splice(0, 1), room.enemy = null) : $scope.message = 'You have no enemies in this room.';
+	    } else if (item === 'steak knife' && room.name === 'kitchen') {
+	
+	      room.enemy ? ($scope.gameState = room.knife, $scope.gameSettings.completed = true, $scope.user.alive = false) : $scope.message = 'You have no enemies in this room.';
+	    } else if (item === 'deli meat' && room.name === 'dining room') {
+	
+	      room.enemy ? ($scope.gameState = room.feed, $scope.user.items.splice(0, 1), room.enemy = null) : $scope.message = 'You have no enemies in this room.';
+	    } else {
+	      $scope.message = 'Can\'t use that here.';
+	    }
+	  };
+	
+	  $scope.makeSandwich = function () {
+	    var room = $scope.user.location;
+	    if (room.enemy && room.name === 'kitchen') {
+	
+	      $scope.gameSettings.completed = true;
+	      $scope.user.alive = false;
+	      $scope.message = room.leaveEarly;
+	      $scope.gameState = null;
+	    } else if (!room.enemy && room.name === 'kitchen') {
+	
+	      $scope.gameSettings.won = true;
+	      $scope.gameSettings.completed = true;
+	      $scope.message = room.win;
+	      $scope.gameState = null;
+	    } else {
+	      $scope.message = 'You cannot make a sandwich here.';
+	    }
 	  };
 	}
 
 /***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baloon = __webpack_require__(12);
-	var cows = __webpack_require__(14);
-	var faces = __webpack_require__(19);
-	
-	exports.say = function (options) {
-		return doIt(options, true);
-	};
-	
-	exports.think = function (options) {
-		return doIt(options, false);
-	};
-	
-	exports.list = cows.list;
-	
-	function doIt (options, sayAloud) {
-		var cow = cows.get(options.f || "default");
-		var face = faces(options);
-		face.thoughts = sayAloud ? "\\" : "o";
-	
-		var action = sayAloud ? "say" : "think";
-		return baloon[action](options.text || options._.join(" "), options.n ? null : options.W) + "\n" + cow(face);
-	}
-
-
-/***/ },
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var os = __webpack_require__(13);
-	
-	exports.say = function (text, wrap) {
-		delimiters = {
-			first : ["/", "\\"],
-			middle : ["|", "|"],
-			last : ["\\", "/"],
-			only : ["<", ">"]
-		};
-	
-		return format(text, wrap, delimiters);
-	}
-	
-	exports.think = function (text, wrap) {
-		delimiters = {
-			first : ["(", ")"],
-			middle : ["(", ")"],
-			last : ["(", ")"],
-			only : ["(", ")"]
-		};
-	
-		return format(text, wrap, delimiters);
-	}
-	
-	function format (text, wrap, delimiters) {
-		var lines = split(text, wrap);
-		var maxLength = max(lines);
-	
-		var balloon;
-		if (lines.length === 1) {
-			balloon = [
-				" " + top(maxLength), 
-				delimiters.only[0] + " " + lines[0] + " " + delimiters.only[1],
-				" " + bottom(maxLength)
-			];
-		} else {
-			balloon = [" " + top(maxLength)];
-	
-			for (var i = 0, len = lines.length; i < len; i += 1) {
-				var delimiter;
-	
-				if (i === 0) {
-					delimiter = delimiters.first;
-				} else if (i === len - 1) {
-					delimiter = delimiters.last;
-				} else {
-					delimiter = delimiters.middle;
-				}
-	
-				balloon.push(delimiter[0] + " " + pad(lines[i], maxLength) + " " + delimiter[1]);
-			}
-	
-			balloon.push(" " + bottom(maxLength));
-		}
-	
-		return balloon.join("\n"); //os.EOL
-	}
-	
-	function split (text, wrap) {
-		text = text.replace(/\r\n?|[\n\u2028\u2029]/g, "\n").replace(/^\uFEFF/, '');
-	
-		var lines = [];
-		if (!wrap) {
-			lines = text.split("\n");
-		} else {
-			var start = 0;
-			while (start < text.length) {
-				var nextNewLine = text.indexOf("\n", start);
-	
-				var wrapAt = Math.min(start + wrap, nextNewLine === -1 ? text.length : nextNewLine);
-	
-				lines.push(text.substring(start, wrapAt));
-				start = wrapAt;
-	
-				// Ignore next new line
-				if (text.charAt(start) === "\n") {
-					start += 1;
-				}
-			}
-		}
-	
-		return lines;
-	}
-	
-	function max (lines) {
-		var max = 0;
-		for (var i = 0, len = lines.length; i < len; i += 1) {
-			if (lines[i].length > max) {
-				max = lines[i].length;
-			}
-		}
-	
-		return max;
-	}
-	
-	function pad (text, length) {
-		return text + (new Array(length - text.length + 1)).join(" ");
-	}
-	
-	function top (length) {
-		return new Array(length + 3).join("_");
-	}
-	
-	function bottom (length) {
-		return new Array(length + 3).join("-");
-	}
-
-/***/ },
-/* 13 */
 /***/ function(module, exports) {
 
-	exports.endianness = function () { return 'LE' };
-	
-	exports.hostname = function () {
-	    if (typeof location !== 'undefined') {
-	        return location.hostname
-	    }
-	    else return '';
-	};
-	
-	exports.loadavg = function () { return [] };
-	
-	exports.uptime = function () { return 0 };
-	
-	exports.freemem = function () {
-	    return Number.MAX_VALUE;
-	};
-	
-	exports.totalmem = function () {
-	    return Number.MAX_VALUE;
-	};
-	
-	exports.cpus = function () { return [] };
-	
-	exports.type = function () { return 'Browser' };
-	
-	exports.release = function () {
-	    if (typeof navigator !== 'undefined') {
-	        return navigator.appVersion;
-	    }
-	    return '';
-	};
-	
-	exports.networkInterfaces
-	= exports.getNetworkInterfaces
-	= function () { return {} };
-	
-	exports.arch = function () { return 'javascript' };
-	
-	exports.platform = function () { return 'browser' };
-	
-	exports.tmpdir = exports.tmpDir = function () {
-	    return '/tmp';
-	};
-	
-	exports.EOL = '\n';
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var path = __webpack_require__(15);
-	var replacer = __webpack_require__(17);
-	
-	var cowdefs = __webpack_require__(18).cowdefs;
-	
-	var textCache = {};
-	
-	exports.get = function (cow) {
-		var text = cowdefs[cow];
-	
-		if (!text) {
-			text = cowdefs['default'];
-		}
-	
-		return function (options) {
-			return replacer(text, options);
-		};
-	}
-	
-	exports.list = function (callback) {
-	
-		var cows = [];
-	
-		for (var cow in cowdefs) {
-		  cows.push(cow)
-		}
-	
-		callback(null, cows);
-	}
-
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-	
-	// resolves . and .. elements in a path array with directory names there
-	// must be no slashes, empty elements, or device names (c:\) in the array
-	// (so also no leading and trailing slashes - it does not distinguish
-	// relative and absolute paths)
-	function normalizeArray(parts, allowAboveRoot) {
-	  // if the path tries to go above the root, `up` ends up > 0
-	  var up = 0;
-	  for (var i = parts.length - 1; i >= 0; i--) {
-	    var last = parts[i];
-	    if (last === '.') {
-	      parts.splice(i, 1);
-	    } else if (last === '..') {
-	      parts.splice(i, 1);
-	      up++;
-	    } else if (up) {
-	      parts.splice(i, 1);
-	      up--;
-	    }
-	  }
-	
-	  // if the path is allowed to go above the root, restore leading ..s
-	  if (allowAboveRoot) {
-	    for (; up--; up) {
-	      parts.unshift('..');
-	    }
-	  }
-	
-	  return parts;
-	}
-	
-	// Split a filename into [root, dir, basename, ext], unix version
-	// 'root' is just a slash, or nothing.
-	var splitPathRe =
-	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-	var splitPath = function(filename) {
-	  return splitPathRe.exec(filename).slice(1);
-	};
-	
-	// path.resolve([from ...], to)
-	// posix version
-	exports.resolve = function() {
-	  var resolvedPath = '',
-	      resolvedAbsolute = false;
-	
-	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-	    var path = (i >= 0) ? arguments[i] : process.cwd();
-	
-	    // Skip empty and invalid entries
-	    if (typeof path !== 'string') {
-	      throw new TypeError('Arguments to path.resolve must be strings');
-	    } else if (!path) {
-	      continue;
-	    }
-	
-	    resolvedPath = path + '/' + resolvedPath;
-	    resolvedAbsolute = path.charAt(0) === '/';
-	  }
-	
-	  // At this point the path should be resolved to a full absolute path, but
-	  // handle relative paths to be safe (might happen when process.cwd() fails)
-	
-	  // Normalize the path
-	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
-	    return !!p;
-	  }), !resolvedAbsolute).join('/');
-	
-	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
-	};
-	
-	// path.normalize(path)
-	// posix version
-	exports.normalize = function(path) {
-	  var isAbsolute = exports.isAbsolute(path),
-	      trailingSlash = substr(path, -1) === '/';
-	
-	  // Normalize the path
-	  path = normalizeArray(filter(path.split('/'), function(p) {
-	    return !!p;
-	  }), !isAbsolute).join('/');
-	
-	  if (!path && !isAbsolute) {
-	    path = '.';
-	  }
-	  if (path && trailingSlash) {
-	    path += '/';
-	  }
-	
-	  return (isAbsolute ? '/' : '') + path;
-	};
-	
-	// posix version
-	exports.isAbsolute = function(path) {
-	  return path.charAt(0) === '/';
-	};
-	
-	// posix version
-	exports.join = function() {
-	  var paths = Array.prototype.slice.call(arguments, 0);
-	  return exports.normalize(filter(paths, function(p, index) {
-	    if (typeof p !== 'string') {
-	      throw new TypeError('Arguments to path.join must be strings');
-	    }
-	    return p;
-	  }).join('/'));
-	};
-	
-	
-	// path.relative(from, to)
-	// posix version
-	exports.relative = function(from, to) {
-	  from = exports.resolve(from).substr(1);
-	  to = exports.resolve(to).substr(1);
-	
-	  function trim(arr) {
-	    var start = 0;
-	    for (; start < arr.length; start++) {
-	      if (arr[start] !== '') break;
-	    }
-	
-	    var end = arr.length - 1;
-	    for (; end >= 0; end--) {
-	      if (arr[end] !== '') break;
-	    }
-	
-	    if (start > end) return [];
-	    return arr.slice(start, end - start + 1);
-	  }
-	
-	  var fromParts = trim(from.split('/'));
-	  var toParts = trim(to.split('/'));
-	
-	  var length = Math.min(fromParts.length, toParts.length);
-	  var samePartsLength = length;
-	  for (var i = 0; i < length; i++) {
-	    if (fromParts[i] !== toParts[i]) {
-	      samePartsLength = i;
-	      break;
-	    }
-	  }
-	
-	  var outputParts = [];
-	  for (var i = samePartsLength; i < fromParts.length; i++) {
-	    outputParts.push('..');
-	  }
-	
-	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-	
-	  return outputParts.join('/');
-	};
-	
-	exports.sep = '/';
-	exports.delimiter = ':';
-	
-	exports.dirname = function(path) {
-	  var result = splitPath(path),
-	      root = result[0],
-	      dir = result[1];
-	
-	  if (!root && !dir) {
-	    // No dirname whatsoever
-	    return '.';
-	  }
-	
-	  if (dir) {
-	    // It has a dirname, strip trailing slash
-	    dir = dir.substr(0, dir.length - 1);
-	  }
-	
-	  return root + dir;
-	};
-	
-	
-	exports.basename = function(path, ext) {
-	  var f = splitPath(path)[2];
-	  // TODO: make this comparison case-insensitive on windows?
-	  if (ext && f.substr(-1 * ext.length) === ext) {
-	    f = f.substr(0, f.length - ext.length);
-	  }
-	  return f;
-	};
-	
-	
-	exports.extname = function(path) {
-	  return splitPath(path)[3];
-	};
-	
-	function filter (xs, f) {
-	    if (xs.filter) return xs.filter(f);
-	    var res = [];
-	    for (var i = 0; i < xs.length; i++) {
-	        if (f(xs[i], i, xs)) res.push(xs[i]);
-	    }
-	    return res;
-	}
-	
-	// String.prototype.substr - negative index don't work in IE8
-	var substr = 'ab'.substr(-1) === 'b'
-	    ? function (str, start, len) { return str.substr(start, len) }
-	    : function (str, start, len) {
-	        if (start < 0) start = str.length + start;
-	        return str.substr(start, len);
-	    }
-	;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
-
-/***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	// shim for using process in browser
-	var process = module.exports = {};
-	
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-	
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-	
-	(function () {
-	    try {
-	        cachedSetTimeout = setTimeout;
-	    } catch (e) {
-	        cachedSetTimeout = function () {
-	            throw new Error('setTimeout is not defined');
-	        }
-	    }
-	    try {
-	        cachedClearTimeout = clearTimeout;
-	    } catch (e) {
-	        cachedClearTimeout = function () {
-	            throw new Error('clearTimeout is not defined');
-	        }
-	    }
-	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-	
-	
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-	
-	
-	
-	}
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-	
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-	
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = runTimeout(cleanUpNextTick);
-	    draining = true;
-	
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    runClearTimeout(timeout);
-	}
-	
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
-	    }
-	};
-	
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-	
-	function noop() {}
-	
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-	
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-	
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = function (cow, variables) {
-		var eyes = escapeRe(variables.eyes);
-		var tongue = escapeRe(variables.tongue);
-	
-		if (cow.indexOf("$the_cow") !== -1) {
-			cow = extractTheCow(cow);
-		}
-	
-		return cow
-			.replace(/\$thoughts/g, variables.thoughts)
-			.replace(/\$eyes/g, eyes)
-			.replace(/\$tongue/g, tongue)
-			.replace(/\$\{eyes\}/g, eyes)
-			.replace(/\$\{tongue\}/g, tongue)
-		;
-	};
-	
-	/*
-	 * "$" dollar signs must be doubled before being used in a regex replace
-	 * This can occur in eyes or tongue.
-	 * For example:
-	 *
-	 * cowsay -g Moo!
-	 *
-	 * cowsay -e "\$\$" Moo!
-	 */
-	function escapeRe (s) {
-		if (s && s.replace) {
-			return s.replace(/\$/g, "$$$$");
-		}
-		return s;
-	}
-	
-	function extractTheCow (cow) {
-		cow = cow.replace(/\r\n?|[\n\u2028\u2029]/g, "\n").replace(/^\uFEFF/, '');
-		var match = /\$the_cow\s*=\s*<<"*EOC"*;*\n([\s\S]+)\nEOC\n/.exec(cow);
-	
-		if (!match) {
-			console.error("Cannot parse cow file\n", cow);
-			return cow;
-		} else {
-			return match[1].replace(/\\{2}/g, "\\").replace(/\\@/g, "@").replace(/\\\$/g, "$");
-		}
-	}
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	// Generated code
-	exports.cowdefs = {
-	  "beavis.zen": "##\r\n## Beavis, with Zen philosophy removed.\r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts         __------~~-,\r\n    $thoughts      ,'            ,\r\n          /               \\\\\r\n         /                :\r\n        |                  '\r\n        |                  |\r\n        |                  |\r\n         |   _--           |\r\n         _| =-.     .-.   ||\r\n         o|/o/       _.   |\r\n         /  ~          \\\\ |\r\n       (____\\@)  ___~    |\r\n          |_===~~~.`    |\r\n       _______.--~     |\r\n       \\\\________       |\r\n                \\\\      |\r\n              __/-___-- -__\r\n             /            _ \\\\\r\nEOC\r\n",
-	  "bud-frogs": "##\r\n## The Budweiser frogs\r\n##\r\n$the_cow = <<EOC;\r\n     $thoughts\r\n      $thoughts\r\n          oO)-.                       .-(Oo\r\n         /__  _\\\\                     /_  __\\\\\r\n         \\\\  \\\\(  |     ()~()         |  )/  /\r\n          \\\\__|\\\\ |    (-___-)        | /|__/\r\n          '  '--'    ==`-'==        '--'  '\r\nEOC\r\n",
-	  "bunny": "##\r\n## A cute little wabbit\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts\r\n   $thoughts   \\\\\r\n        \\\\ /\\\\\r\n        ( )\r\n      .( o ).\r\nEOC\r\n",
-	  "cheese": "##\r\n## The cheese from milk & cheese\r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts\r\n    $thoughts\r\n      _____   _________\r\n     /     \\\\_/         |\r\n    |                 ||\r\n    |                 ||\r\n   |    ###\\\\  /###   | |\r\n   |     0  \\\\/  0    | |\r\n  /|                 | |\r\n / |        <        |\\\\ \\\\\r\n| /|                 | | |\r\n| |     \\\\_______/   |  | |\r\n| |                 | / /\r\n/||                 /|||\r\n   ----------------|\r\n        | |    | |\r\n        ***    ***\r\n       /___\\\\  /___\\\\\r\nEOC\r\n",
-	  "chick": "$the_cow = <<\"EOC\";\r\n$thoughts\r\n $thoughts\r\n\r\n        .---.\r\n     _ /     ' .---.\r\n     >|  o    `     `\\\r\n     ` \\       .---._ '._ ,\r\n        '-.;         /`  /'\r\n           \\    '._.'   /\r\n            '.        .'\r\n              `\";--\\_/\r\n       jgs    _/_   |\r\n           -'`/  .--;--\r\n             '    .'\r\n\r\nEOC\r\n",
-	  "chicken-and-egg": "$the_cow = <<\"EOC\";\r\n$thoughts\r\n $thoughts\r\n\r\n\r\n              /'._     _,\r\n              \\   ;__.'  }\r\n          (`-._;-\" _.--.}'\r\n          /_'    /`    _}     _.--\"\"\"-.\r\n            `.   \\_._.;     .'         \\\r\n              '-.__ /      /            |\r\n      jgs      _/  `\\      \\            /\r\n              ^`   ^`       '._       .'\r\n                               `\"\"\"\"\"`\r\nEOC\r\n",
-	  "cower": "##\r\n## A cowering cow\r\n##\r\n$the_cow = <<EOC;\r\n     $thoughts\r\n      $thoughts\r\n        ,__, |    | \r\n        (oo)\\\\|    |___\r\n        (__)\\\\|    |   )\\\\_\r\n             |    |_w |  \\\\\r\n             |    |  ||   *\r\n\r\n             Cower....\r\nEOC\r\n",
-	  "daemon": "##\r\n## 4.4 >> 5.4\r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts         ,        ,\r\n    $thoughts       /(        )`\r\n     $thoughts      \\\\ \\\\___   / |\r\n            /- _  `-/  '\r\n           (/\\\\/ \\\\ \\\\   /\\\\\r\n           / /   | `    \\\\\r\n           O O   ) /    |\r\n           `-^--'`<     '\r\n          (_.)  _  )   /\r\n           `.___/`    /\r\n             `-----' /\r\n<----.     __ / __   \\\\\r\n<----|====O)))==) \\\\) /====\r\n<----'    `--' `.__,' \\\\\r\n             |        |\r\n              \\\\       /\r\n        ______( (_  / \\\\______\r\n      ,'  ,-----'   |        \\\\\r\n      `--{__________)        \\\\/\r\nEOC\r\n",
-	  "default": "$the_cow = <<\"EOC\";\r\n        $thoughts   ^__^\r\n         $thoughts  ($eyes)\\\\_______\r\n            (__)\\\\       )\\\\/\\\\\r\n             $tongue ||----w |\r\n                ||     ||\r\nEOC\r\n",
-	  "doge": "##\r\n## Doge\r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts\r\n    $thoughts\r\n\r\n           _                _\r\n          / /.           _-//\r\n         / ///         _-   /\r\n        //_-//=========     /\r\n      _///        //_ ||   ./\r\n    _|                 -__-||\r\n   |  __              - \\\\   \\\r\n  |  |#-       _-|_           |\r\n  |            |#|||       _   |  \r\n |  _==_                       ||\r\n- ==|.=.=|_ =                  |\r\n|  |-|-  ___                  |\r\n|    --__   _                /\r\n||     ===                  |\r\n |                     _. //\r\n  ||_         __-   _-  _|\r\n     \\_______/  ___/  _|\r\n                   --*\r\nEOC\r\n",
-	  "dragon-and-cow": "##\r\n## A dragon smiting a cow, possible credit to kube@csua.berkeley.edu\r\n##\r\n$the_cow = <<EOC;\r\n                       $thoughts                    ^    /^\r\n                        $thoughts                  / \\\\  // \\\\\r\n                         $thoughts   |\\\\___/|      /   \\\\//  .\\\\\r\n                          $thoughts  /O  O  \\\\__  /    //  | \\\\ \\\\           *----*\r\n                            /     /  \\\\/_/    //   |  \\\\  \\\\          \\\\   |\r\n                            \\@___\\@`    \\\\/_   //    |   \\\\   \\\\         \\\\/\\\\ \\\\\r\n                           0/0/|       \\\\/_ //     |    \\\\    \\\\         \\\\  \\\\\r\n                       0/0/0/0/|        \\\\///      |     \\\\     \\\\       |  |\r\n                    0/0/0/0/0/_|_ /   (  //       |      \\\\     _\\\\     |  /\r\n                 0/0/0/0/0/0/`/,_ _ _/  ) ; -.    |    _ _\\\\.-~       /   /\r\n                             ,-}        _      *-.|.-~-.           .~    ~\r\n            \\\\     \\\\__/        `/\\\\      /                 ~-. _ .-~      /\r\n             \\\\____($eyes)           *.   }            {                   /\r\n             (    (--)          .----~-.\\\\        \\\\-`                 .~\r\n             //__\\\\\\\\  \\\\__ Ack!   ///.----..<        \\\\             _ -~\r\n            //    \\\\\\\\               ///-._ _ _ _ _ _ _{^ - - - - ~\r\nEOC\r\n",
-	  "dragon": "##\r\n## The Whitespace Dragon\r\n##\r\n$the_cow = <<EOC;\r\n      $thoughts                    / \\\\  //\\\\\r\n       $thoughts    |\\\\___/|      /   \\\\//  \\\\\\\\\r\n            /0  0  \\\\__  /    //  | \\\\ \\\\    \r\n           /     /  \\\\/_/    //   |  \\\\  \\\\  \r\n           \\@_^_\\@'/   \\\\/_   //    |   \\\\   \\\\ \r\n           //_^_/     \\\\/_ //     |    \\\\    \\\\\r\n        ( //) |        \\\\///      |     \\\\     \\\\\r\n      ( / /) _|_ /   )  //       |      \\\\     _\\\\\r\n    ( // /) '/,_ _ _/  ( ; -.    |    _ _\\\\.-~        .-~~~^-.\r\n  (( / / )) ,-{        _      `-.|.-~-.           .~         `.\r\n (( // / ))  '/\\\\      /                 ~-. _ .-~      .-~^-.  \\\\\r\n (( /// ))      `.   {            }                   /      \\\\  \\\\\r\n  (( / ))     .----~-.\\\\        \\\\-'                 .~         \\\\  `. \\\\^-.\r\n             ///.----..>        \\\\             _ -~             `.  ^-`  ^-_\r\n               ///-._ _ _ _ _ _ _}^ - - - - ~                     ~-- ,.-~\r\n                                                                  /.-~\r\nEOC\r\n",
-	  "elephant-in-snake": "##\r\n## Do we need to explain this?\r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts\r\n    $thoughts              ....       \r\n           ........    .      \r\n          .            .      \r\n         .             .      \r\n.........              .......\r\n..............................\r\n\r\nElephant inside ASCII snake\r\nEOC\r\n",
-	  "elephant": "##\r\n## An elephant out and about\r\n##\r\n$the_cow = <<EOC;\r\n $thoughts     /\\\\  ___  /\\\\\r\n  $thoughts   // \\\\/   \\\\/ \\\\\\\\\r\n     ((    O O    ))\r\n      \\\\\\\\ /     \\\\ //\r\n       \\\\/  | |  \\\\/ \r\n        |  | |  |  \r\n        |  | |  |  \r\n        |   o   |  \r\n        | |   | |  \r\n        |m|   |m|  \r\nEOC\r\n",
-	  "eyes": "##\r\n## Evil-looking eyes\r\n##\r\n$the_cow = <<EOC;\r\n    $thoughts\r\n     $thoughts\r\n                                   .::!!!!!!!:.\r\n  .!!!!!:.                        .:!!!!!!!!!!!!\r\n  ~~~~!!!!!!.                 .:!!!!!!!!!UWWW\\$\\$\\$ \r\n      :\\$\\$NWX!!:           .:!!!!!!XUWW\\$\\$\\$\\$\\$\\$\\$\\$\\$P \r\n      \\$\\$\\$\\$\\$##WX!:      .<!!!!UW\\$\\$\\$\\$\"  \\$\\$\\$\\$\\$\\$\\$\\$# \r\n      \\$\\$\\$\\$\\$  \\$\\$\\$UX   :!!UW\\$\\$\\$\\$\\$\\$\\$\\$\\$   4\\$\\$\\$\\$\\$* \r\n      ^\\$\\$\\$B  \\$\\$\\$\\$\\\\     \\$\\$\\$\\$\\$\\$\\$\\$\\$\\$\\$\\$   d\\$\\$R\" \r\n        \"*\\$bd\\$\\$\\$\\$      '*\\$\\$\\$\\$\\$\\$\\$\\$\\$\\$\\$o+#\" \r\n             \"\"\"\"          \"\"\"\"\"\"\" \r\nEOC\r\n",
-	  "flaming-sheep": "##\r\n## The flaming sheep, contributed by Geordan Rosario (geordan@csua.berkeley.edu)\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts            .    .     .   \r\n   $thoughts      .  . .     `  ,     \r\n    $thoughts    .; .  : .' :  :  : . \r\n     $thoughts   i..`: i` i.i.,i  i . \r\n      $thoughts   `,--.|i |i|ii|ii|i: \r\n           U${eyes}U\\\\.'\\@\\@\\@\\@\\@\\@`.||' \r\n           \\\\__/(\\@\\@\\@\\@\\@\\@\\@\\@\\@\\@)'  \r\n                (\\@\\@\\@\\@\\@\\@\\@\\@)    \r\n                `YY~~~~YY'    \r\n                 ||    ||     \r\nEOC\r\n",
-	  "ghostbusters": "##\r\n## Ghostbusters!\r\n##\r\n$the_cow = <<EOC;\r\n          $thoughts\r\n           $thoughts\r\n            $thoughts          __---__\r\n                    _-       /--______\r\n               __--( /     \\\\ )XXXXXXXXXXX\\\\v.\r\n             .-XXX(   O   O  )XXXXXXXXXXXXXXX-\r\n            /XXX(       U     )        XXXXXXX\\\\\r\n          /XXXXX(              )--_  XXXXXXXXXXX\\\\\r\n         /XXXXX/ (      O     )   XXXXXX   \\\\XXXXX\\\\\r\n         XXXXX/   /            XXXXXX   \\\\__ \\\\XXXXX\r\n         XXXXXX__/          XXXXXX         \\\\__---->\r\n ---___  XXX__/          XXXXXX      \\\\__         /\r\n   \\\\-  --__/   ___/\\\\  XXXXXX            /  ___--/=\r\n    \\\\-\\\\    ___/    XXXXXX              '--- XXXXXX\r\n       \\\\-\\\\/XXX\\\\ XXXXXX                      /XXXXX\r\n         \\\\XXXXXXXXX   \\\\                    /XXXXX/\r\n          \\\\XXXXXX      >                 _/XXXXX/\r\n            \\\\XXXXX--__/              __-- XXXX/\r\n             -XXXXXXXX---------------  XXXXXX-\r\n                \\\\XXXXXXXXXXXXXXXXXXXXXXXXXX/\r\n                  \"\"VXXXXXXXXXXXXXXXXXXV\"\"\r\nEOC\r\n",
-	  "hellokitty": "##\r\n## Hello Kitty\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts\r\n   $thoughts\r\n      /\\\\_)o<\r\n     |      \\\\\r\n     | O . O|\r\n      \\\\_____/\r\nEOC\r\n",
-	  "kiss": "##\r\n## A lovers' empbrace\r\n##\r\n$the_cow = <<EOC;\r\n     $thoughts\r\n      $thoughts\r\n             ,;;;;;;;,\r\n            ;;;;;;;;;;;,\r\n           ;;;;;'_____;'\r\n           ;;;(/))))|((\\\\\r\n           _;;((((((|))))\r\n          / |_\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\r\n     .--~(  \\\\ ~))))))))))))\r\n    /     \\\\  `\\\\-(((((((((((\\\\\\\\\r\n    |    | `\\\\   ) |\\\\       /|)\r\n     |    |  `. _/  \\\\_____/ |\r\n      |    , `\\\\~            /\r\n       |    \\\\  \\\\           /\r\n      | `.   `\\\\|          /\r\n      |   ~-   `\\\\        /\r\n       \\\\____~._/~ -_,   (\\\\\r\n        |-----|\\\\   \\\\    ';;\r\n       |      | :;;;'     \\\\\r\n      |  /    |            |\r\n      |       |            |\r\nEOC\r\n",
-	  "kitty": "##\r\n## A kitten of sorts, I think\r\n##\r\n$the_cow = <<EOC;\r\n     $thoughts\r\n      $thoughts\r\n       (\"`-'  '-/\") .___..--' ' \"`-._\r\n         ` *_ *  )    `-.   (      ) .`-.__. `)\r\n         (_Y_.) ' ._   )   `._` ;  `` -. .-'\r\n      _.. `--'_..-_/   /--' _ .' ,4\r\n   ( i l ),-''  ( l i),'  ( ( ! .-'    \r\nEOC\r\n",
-	  "koala": "##\r\n## From the canonical koala collection\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts\r\n   $thoughts\r\n       ___  \r\n     {~._.~}\r\n      ( Y )\r\n     ()~*~()   \r\n     (_)-(_)   \r\nEOC\r\n",
-	  "kosh": "##\r\n## It's a Kosh Cow!\r\n##\r\n$the_cow = <<EOC;\r\n    $thoughts\r\n     $thoughts\r\n      $thoughts\r\n  ___       _____     ___\r\n /   \\\\     /    /|   /   \\\\\r\n|     |   /    / |  |     |\r\n|     |  /____/  |  |     |     \r\n|     |  |    |  |  |     |\r\n|     |  | {} | /   |     |\r\n|     |  |____|/    |     |\r\n|     |    |==|     |     |\r\n|      \\\\___________/      |\r\n|                         |\r\n|                         |\r\nEOC\r\n",
-	  "luke-koala": "##\r\n## From the canonical koala collection\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts\r\n   $thoughts          .\r\n       ___   //\r\n     {~._.~}// \r\n      ( Y )K/  \r\n     ()~*~()   \r\n     (_)-(_)   \r\n     Luke    \r\n     Sywalker\r\n     koala   \r\nEOC\r\n",
-	  "mech-and-cow": "                                   ,-----.\r\n                                   |     |\r\n                                ,--|     |-.\r\n                         __,----|  |     | |\r\n                       ,;::     |  `_____' |\r\n                       `._______|    i^i   |\r\n                                `----| |---'| .\r\n                           ,-------._| |== ||//\r\n                           |       |_|P`.  /'/\r\n                           `-------' 'Y Y/'/'\r\n                                     .==\\ /_\\\r\n   ^__^                             /   /'|  `i\r\n   (oo)\\_______                   /'   /  |   |\r\n   (__)\\       )\\/\\             /'    /   |   `i\r\n       ||----w |           ___,;`----'.___L_,-'`\\__\r\n       ||     ||          i_____;----\\.____i\"\"\\____\\\r\n\r\n\r\n\r\n\r\n\r\n",
-	  "meow": "##\r\n## A meowing tiger?\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts\r\n   $thoughts ,   _ ___.--'''`--''//-,-_--_.\r\n      \\\\`\"' ` || \\\\\\\\ \\\\ \\\\\\\\/ / // / ,-\\\\\\\\`,_\r\n     /'`  \\\\ \\\\ || Y  | \\\\|/ / // / - |__ `-,\r\n    /\\@\"\\\\  ` \\\\ `\\\\ |  | ||/ // | \\\\/  \\\\  `-._`-,_.,\r\n   /  _.-. `.-\\\\,___/\\\\ _/|_/_\\\\_\\\\/|_/ |     `-._._)\r\n   `-'``/  /  |  // \\\\__/\\\\__  /  \\\\__/ \\\\\r\n        `-'  /-\\\\/  | -|   \\\\__ \\\\   |-' |\r\n          __/\\\\ / _/ \\\\/ __,-'   ) ,' _|'\r\n         (((__/(((_.' ((___..-'((__,'\r\nEOC\r\n",
-	  "milk": "##\r\n## Milk from Milk and Cheese\r\n##\r\n$the_cow = <<EOC;\r\n $thoughts     ____________ \r\n  $thoughts    |__________|\r\n      /           /\\\\\r\n     /           /  \\\\\r\n    /___________/___/|\r\n    |          |     |\r\n    |  ==\\\\ /== |     |\r\n    |   O   O  | \\\\ \\\\ |\r\n    |     <    |  \\\\ \\\\|\r\n   /|          |   \\\\ \\\\\r\n  / |  \\\\_____/ |   / /\r\n / /|          |  / /|\r\n/||\\\\|          | /||\\\\/\r\n    -------------|   \r\n        | |    | | \r\n       <__/    \\\\__>\r\nEOC\r\n",
-	  "moofasa": "##\r\n## MOOfasa.\r\n##\r\n$the_cow = <<EOC;\r\n       $thoughts    ____\r\n        $thoughts  /    \\\\\r\n          | ^__^ |\r\n          | ($eyes) |______\r\n          | (__) |      )\\\\/\\\\\r\n           \\\\____/|----w |\r\n                ||     ||\r\n\r\n\t         Moofasa\r\nEOC\r\n",
-	  "moose": "$the_cow = <<EOC;\r\n  $thoughts\r\n   $thoughts   \\\\_\\\\_    _/_/\r\n    $thoughts      \\\\__/\r\n           ($eyes)\\\\_______\r\n           (__)\\\\       )\\\\/\\\\\r\n            $tongue ||----w |\r\n               ||     ||\r\nEOC\r\n",
-	  "mutilated": "##\r\n## A mutilated cow, from aspolito@csua.berkeley.edu\r\n##\r\n$the_cow = <<EOC;\r\n       $thoughts   \\\\_______\r\n v__v   $thoughts  \\\\   O   )\r\n ($eyes)      ||----w |\r\n (__)      ||     ||  \\\\/\\\\\r\n  $tongue\r\nEOC\r\n",
-	  "ren": "##\r\n## Ren \r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts\r\n    $thoughts\r\n    ____  \r\n   /# /_\\\\_\r\n  |  |/o\\\\o\\\\\r\n  |  \\\\\\\\_/_/\r\n / |_   |  \r\n|  ||\\\\_ ~| \r\n|  ||| \\\\/  \r\n|  |||_    \r\n \\\\//  |    \r\n  ||  |    \r\n  ||_  \\\\   \r\n  \\\\_|  o|  \r\n  /\\\\___/   \r\n /  ||||__ \r\n    (___)_)\r\nEOC\r\n",
-	  "rooster": "$the_cow = <<\"EOC\";\r\n$thoughts\r\n $thoughts\r\n\r\n.\".\".\".\r\n(`       `)               _.-=-.\r\n'._.--.-;             .-`  -'  '.\r\n.-'`.o )  \\           /  .-_.--'  `\\\r\n`;---) \\    ;         /  / ;' _-_.-' `\r\n`;\"`  ;    \\        ; .  .'   _-' \\\r\n(    )    |        |  / .-.-'    -`\r\n '-.-'     \\       | .' ` '.-'-\\`\r\n  /_./\\_.|\\_\\      ;  ' .'-'.-.\r\n  /         '-._    \\` /  _;-,\r\n |         .-=-.;-._ \\  -'-,\r\n \\        /      `\";`-`,-\"`)\r\n  \\       \\     '-- `\\.\\\r\n   '.      '._ '-- '--'/\r\n     `-._     `'----'`;\r\n         `\"\"\"--.____,/\r\n                \\\\  \\\r\n                // /`\r\n            ___// /__\r\n  jgs     (`(`(---\"-`)\r\n\r\nEOC\r\n",
-	  "satanic": "##\r\n## Satanic cow, source unknown.\r\n##\r\n$the_cow = <<EOC;\r\n     $thoughts\r\n      $thoughts  (__)  \r\n         (\\\\/)  \r\n  /-------\\\\/    \r\n / | 666 ||    \r\n*  ||----||      \r\n   ~~    ~~      \r\nEOC\r\n",
-	  "sheep": "##\r\n## The non-flaming sheep.\r\n##\r\n$the_cow = <<EOC\r\n  $thoughts\r\n   $thoughts\r\n       __     \r\n      U${eyes}U\\\\.'\\@\\@\\@\\@\\@\\@`.\r\n      \\\\__/(\\@\\@\\@\\@\\@\\@\\@\\@\\@\\@)\r\n           (\\@\\@\\@\\@\\@\\@\\@\\@)\r\n           `YY~~~~YY'\r\n            ||    ||\r\nEOC\r\n",
-	  "skeleton": "##\r\n## This 'Scowleton' brought to you by one of \r\n## {appel,kube,rowe}@csua.berkeley.edu\r\n##\r\n$the_cow = <<EOC;\r\n          $thoughts      (__)      \r\n           $thoughts     /$eyes|  \r\n            $thoughts   (_\"_)*+++++++++*\r\n                   //I#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\I\\\\\r\n                   I[I|I|||||I I `\r\n                   I`I'///'' I I\r\n                   I I       I I\r\n                   ~ ~       ~ ~\r\n                     Scowleton\r\nEOC\r\n",
-	  "small": "##\r\n## A small cow, artist unknown\r\n##\r\n$eyes = \"..\" unless ($eyes);\r\n$the_cow = <<EOC;\r\n       $thoughts   ,__,\r\n        $thoughts  ($eyes)____\r\n           (__)    )\\\\\r\n            $tongue||--|| *\r\nEOC\r\n",
-	  "squirrel": "$the_cow = <<EOC;\r\n  $thoughts\r\n     $thoughts\r\n                  _ _\r\n       | \\__/|  .~    ~.\r\n       /$eyes `./      .'\r\n      {o__,   \\    {\r\n        / .  . )    \\\r\n        `-` '-' \\    }\r\n       .(   _(   )_.'\r\n      '---.~_ _ _|\r\n                                                     \r\nEOC\r\n",
-	  "stegosaurus": "##\r\n## A stegosaur with a top hat?\r\n##\r\n$the_cow = <<EOC;\r\n$thoughts                             .       .\r\n $thoughts                           / `.   .' \" \r\n  $thoughts                  .---.  <    > <    >  .---.\r\n   $thoughts                 |    \\\\  \\\\ - ~ ~ - /  /    |\r\n         _____          ..-~             ~-..-~\r\n        |     |   \\\\~~~\\\\.'                    `./~~~/\r\n       ---------   \\\\__/                        \\\\__/\r\n      .'  O    \\\\     /               /       \\\\  \" \r\n     (_____,    `._.'               |         }  \\\\/~~~/\r\n      `----.          /       }     |        /    \\\\__/\r\n            `-.      |       /      |       /      `. ,~~|\r\n                ~-.__|      /_ - ~ ^|      /- _      `..-'   \r\n                     |     /        |     /     ~-.     `-. _  _  _\r\n                     |_____|        |_____|         ~ - . _ _ _ _ _>\r\nEOC\r\n",
-	  "stimpy": "##\r\n## Stimpy!\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts     .    _  .    \r\n   $thoughts    |\\\\_|/__/|    \r\n       / / \\\\/ \\\\  \\\\  \r\n      /__|O||O|__ \\\\ \r\n     |/_ \\\\_/\\\\_/ _\\\\ |  \r\n     | | (____) | ||  \r\n     \\\\/\\\\___/\\\\__/  // \r\n     (_/         ||\r\n      |          ||\r\n      |          ||\\\\   \r\n       \\\\        //_/  \r\n        \\\\______//\r\n       __ || __||\r\n      (____(____)\r\nEOC\r\n",
-	  "supermilker": "##\r\n## A cow being milked, probably from Lars Smith (lars@csua.berkeley.edu)\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts   ^__^\r\n   $thoughts  ($eyes)\\\\_______        ________\r\n      (__)\\\\       )\\\\/\\\\    |Super |\r\n       $tongue ||----W |       |Milker|\r\n          ||    UDDDDDDDDD|______|\r\nEOC\r\n",
-	  "surgery": "##\r\n## A cow operation, artist unknown\r\n##\r\n$the_cow = <<EOC;\r\n          $thoughts           \\\\  / \r\n           $thoughts           \\\\/  \r\n               (__)    /\\\\         \r\n               ($eyes)   O  O        \r\n               _\\\\/_   //         \r\n         *    (    ) //       \r\n          \\\\  (\\\\\\\\    //       \r\n           \\\\(  \\\\\\\\    )                              \r\n            (   \\\\\\\\   )   /\\\\                          \r\n  ___[\\\\______/^^^^^^^\\\\__/) o-)__                     \r\n |\\\\__[=======______//________)__\\\\                    \r\n \\\\|_______________//____________|                    \r\n     |||      || //||     |||\r\n     |||      || @.||     |||                        \r\n      ||      \\\\/  .\\\\/      ||                        \r\n                 . .                                 \r\n                '.'.`                                \r\n\r\n            COW-OPERATION                           \r\nEOC\r\n",
-	  "turkey": "##\r\n## Turkey!\r\n##\r\n$the_cow = <<EOC;\r\n  $thoughts                                  ,+*^^*+___+++_\r\n   $thoughts                           ,*^^^^              )\r\n    $thoughts                       _+*                     ^**+_\r\n     $thoughts                    +^       _ _++*+_+++_,         )\r\n              _+^^*+_    (     ,+*^ ^          \\\\+_        )\r\n             {       )  (    ,(    ,_+--+--,      ^)      ^\\\\\r\n            { (\\@)    } f   ,(  ,+-^ __*_*_  ^^\\\\_   ^\\\\       )\r\n           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /\r\n          ( /  (    (        ,___    ^*+_+* )   <    <      \\\\\r\n           U _/     )    *--<  ) ^\\\\-----++__)   )    )       )\r\n            (      )  _(^)^^))  )  )\\\\^^^^^))^*+/    /       /\r\n          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^\r\n         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)\r\n          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^\r\n          \\\\             \\\\_)^)_)) ))^^^^^^^^^^))^^^^)\r\n           (_             ^\\\\__^^^^^^^^^^^^))^^^^^^^)\r\n             ^\\\\___            ^\\\\__^^^^^^))^^^^^^^^)\\\\\\\\\r\n                  ^^^^^\\\\uuu/^^\\\\uuu/^^^^\\\\^\\\\^\\\\^\\\\^\\\\^\\\\^\\\\^\\\\\r\n                     ___) >____) >___   ^\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_\\\\)\r\n                    ^^^//\\\\\\\\_^^//\\\\\\\\_^       ^(\\\\_\\\\_\\\\_\\\\)\r\n                      ^^^ ^^ ^^^ ^\r\nEOC\r\n",
-	  "turtle": "##\r\n## A mysterious turtle...\r\n##\r\n$the_cow = <<EOC;\r\n    $thoughts                                  ___-------___\r\n     $thoughts                             _-~~             ~~-_\r\n      $thoughts                         _-~                    /~-_\r\n             /^\\\\__/^\\\\         /~  \\\\                   /    \\\\\r\n           /|  O|| O|        /      \\\\_______________/        \\\\\r\n          | |___||__|      /       /                \\\\          \\\\\r\n          |          \\\\    /      /                    \\\\          \\\\\r\n          |   (_______) /______/                        \\\\_________ \\\\\r\n          |         / /         \\\\                      /            \\\\\r\n           \\\\         \\\\^\\\\\\\\         \\\\                  /               \\\\     /\r\n             \\\\         ||           \\\\______________/      _-_       //\\\\__//\r\n               \\\\       ||------_-~~-_ ------------- \\\\ --/~   ~\\\\    || __/\r\n                 ~-----||====/~     |==================|       |/~~~~~\r\n                  (_(__/  ./     /                    \\\\_\\\\      \\\\.\r\n                         (_(___/                         \\\\_____)_)\r\nEOC\r\n",
-	  "tux": "##\r\n## TuX\r\n## (c) pborys@p-soft.silesia.linux.org.pl \r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts\r\n    $thoughts\r\n        .--.\r\n       |o_o |\r\n       |:_/ |\r\n      //   \\\\ \\\\\r\n     (|     | )\r\n    /'\\\\_   _/`\\\\\r\n    \\\\___)=(___/\r\n\r\nEOC\r\n",
-	  "vader-koala": "##\r\n## Another canonical koala?\r\n##\r\n$the_cow = <<EOC;\r\n   $thoughts\r\n    $thoughts        .\r\n     .---.  //\r\n    Y|o o|Y// \r\n   /_(i=i)K/ \r\n   ~()~*~()~  \r\n    (_)-(_)   \r\n\r\n     Darth \r\n     Vader    \r\n     koala        \r\nEOC\r\n",
-	  "vader": "##\r\n## Cowth Vader, from geordan@csua.berkeley.edu\r\n##\r\n$the_cow = <<EOC;\r\n        $thoughts    ,-^-.\r\n         $thoughts   !oYo!\r\n          $thoughts /./=\\\\.\\\\______\r\n               ##        )\\\\/\\\\\r\n                ||-----w||\r\n                ||      ||\r\n\r\n               Cowth Vader\r\nEOC\r\n",
-	  "www": "##\r\n## A cow wadvertising the World Wide Web, from lim@csua.berkeley.edu\r\n##\r\n$the_cow = <<EOC;\r\n        $thoughts   ^__^\r\n         $thoughts  ($eyes)\\\\_______\r\n            (__)\\\\       )\\\\/\\\\\r\n             $tongue ||--WWW |\r\n                ||     ||\r\nEOC\r\n"
-	}
-
-/***/ },
-/* 19 */
-/***/ function(module, exports) {
-
-	var modes = {
-		"b" : {
-			eyes : "==",
-			tongue : "  "
-		},
-		"d" : {
-			eyes : "xx",
-			tongue : "U "
-		},
-		"g" : {
-			eyes : "$$",
-			tongue : "  "
-		},
-		"p" : {
-			eyes : "@@",
-			tongue : "  "
-		},
-		"s" : {
-			eyes : "**",
-			tongue : "U "
-		},
-		"t" : {
-			eyes : "--",
-			tongue : "  "
-		},
-		"w" : {
-			eyes : "OO",
-			tongue : "  "
-		},
-		"y" : {
-			eyes : "..",
-			tongue : "  "
-		}
-	};
-	
-	module.exports = function (options) {
-		for (var mode in modes) {
-			if (options[mode] === true) {
-				return modes[mode];
-			}
-		}
-	
-		return {
-			eyes : options.e || "oo",
-			tongue : options.T || "  "
-		};
-	};
-
+	module.exports = "<div ng-controller=\"game\">\n  <h1> The Cat House </h1>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <div ng-if=\"!gameSettings.completed\">\n          <h3>Game Commands</h3>\n          <ul>\n            <li ng-show=\"gameCommands\" ng-repeat=\"each in gameCommands\">{{each}}</li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"col-md-4\">\n        <div id=\"game-information\" ng-controller=\"player\">\n          <h3>Game Information</h3>\n          <div ng-if=\"gameSettings.completed\">\n            <p>Game Status: {{getStatus()}}\n            <p>{{getEnd()}}</p>\n          </div>\n          <div ng-if=\"!gameSettings.completed\">\n            <label>Command: <input type=\"text\" ng-model=\"gameInput\" ng-keydown=\"checkEvent($event, playerAction)\" placeholder={{init}}>\n          </div>\n          <div>{{message}}</div>\n          <div>{{gameState}}</div>\n          <p ng-if=\"!gameSettings.completed\">Game Status: {{getStatus()}}</p>\n        </div>\n      </div>\n    </div>\n\n\n    <div id=\"player-information\">\n      <h3>Player Information</h3>\n      <ul>\n        <li>Player Status: {{getPlayerStatus()}}</li>\n        <li ng-if=\"!gameSettings.completed\">Your Item: {{user.items[0]}}</li>\n      </ul>\n    </div>\n\n    <div id=\"room-information\" ng-if=\"!gameSettings.completed\">\n      <h3>Room Information</h3>\n      <ul>\n        <li>Location: {{user.location.name}}</li>\n        <li>Enemies: {{showEnemies(current)}}</li>\n        <li ng-if=\"user.location.items.length === 0\">Items: None</li>\n        <ul ng-if=\"user.location.items.length > 0\">Items:\n          <li  ng-show=\"user.location.items\" ng-repeat=\"each in user.location.items\">{{each}}</li>\n        </ul>\n      </ul>\n    </div>\n\n  </div>\n</div>\n\n<!-- <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js\"></script>\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script> -->\n";
 
 /***/ }
 /******/ ]);

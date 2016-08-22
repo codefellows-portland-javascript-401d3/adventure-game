@@ -27,7 +27,16 @@ module.exports = function (config) {
 
     browsers: ['Chrome', 'Safari'],
 
-    reporters: ['progress'],
+    reporters: ['spec'],
+
+    specReporter: {
+      maxLogLines: 5,
+      suppressErrorSummary: true,
+      suppressFailed: false,
+      suppressPassed: false,
+      suppressSkipped: true,
+      showSpecTiming: false
+    },
 
     port: 9876,
 

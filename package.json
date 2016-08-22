@@ -39,6 +39,7 @@
     "karma-chrome-launcher": "^1.0.1",
     "karma-mocha": "^1.1.1",
     "karma-safari-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.8.0",
     "mocha": "^3.0.2",
     "style-loader": "^0.13.1",

@@ -1,54 +1,60 @@
-<h1> Controllers </h1>
-
 <div ng-controller="game">
+  <h1> The Cat House </h1>
+  <div class="container">
 
-  <ul>Game Commands:
-    <li ng-show="gameCommands" ng-repeat="gameCommand in gameCommands">{{gameCommand}}</li>
-  </ul>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="game-information" ng-controller="player">
+          <h3 ng-if="!gameSettings.completed"><b>Game Status: {{getStatus()}}</b></h3>
+          <div ng-if="gameSettings.completed">
+            <p>Game Status: <span class="game-status">{{getStatus()}}</span></p>
+            <p>{{getEnd()}}</p>
+          </div>
+          <div ng-if="!gameSettings.completed">
+            <label>Command: <input type="text" ng-model="gameInput" ng-keydown="checkEvent($event, playerAction)" placeholder={{init}}>
+          </div>
+          <div class="game-message">{{message}}</div>
+          <div>{{gameState}}</div>
 
-  <label>Command: <input type="text" ng-model="input"><button ng-click="act(input)">Make Move</button>
+        </div>
+      </div>
 
-  <p>Game Status: {{getStatus()}}
+      <div class="col-md-6">
+        <div ng-if="!gameSettings.completed">
+          <h3><b><em>Game Commands</em></b></h3>
+          <ul>
+            <li ng-show="gameCommands" ng-repeat="each in gameCommands">{{each}}</li>
+          </ul>
+        </div>
+      </div>
 
+    </div>
 
+    <div class="row">
+      <div id="player-information" class="col-md-6">
+        <h3><b><em>Player Information</em></b></h3>
+        <ul>
+          <li>Player Status: {{getPlayerStatus()}}</li>
+          <div ng-if="!gameSettings.completed">
+            <li ng-if="user.items.length === 0">Your Item: None</li>
+            <li ng-if="user.items.length > 0">Your Item: <span class="item-color">{{user.items[0]}}</span></li>
+          </div>
+        </ul>
+      </div>
 
-  <div ng-controller="player">
-    <p>Player Status: {{getPlayerStatus()}}
+      <div id="room-information" class="col-md-6" ng-if="!gameSettings.completed">
+        <h3><b><em>Room Information</em></b></h3>
+        <ul>
+          <li>Location: {{user.location.name}}</li>
+          <li ng-if="!user.location.enemy">Enemies: {{showEnemies(current)}}</li>
+          <li ng-if="user.location.enemy">Enemies: <span class="enemy-color">{{showEnemies(current)}}</span></li>
+          <li ng-if="user.location.items.length === 0">Items: None</li>
+        </ul>
+        <ul ng-if="user.location.items.length > 0">Items:
+          <li  ng-show="user.location.items" ng-repeat="each in user.location.items"><span class="item-color">{{each}}</span></li>
+        </ul>
+      </div>
+    </div>
+
   </div>
-
-  <div ng-controller="location">
-    <ul>
-      <li>Location: {{getCurrent()}}</li>
-      <li>Enemies: {{showEnemies(current)}}</li>
-      <li>Weapons: {{showWeapons(current)}}</li>
-    </ul>
-  </div>
-
 </div>
-
-<!-- <div ng-controller="counter">
-  {{count}}
-  <button ng-click="add()">Add</button>
-  <input ng-keydown="checkEvent($event)" ng-init="num=0">
-  <div>Keydown Count is: {{num}}
-  <div>
-    Half Count is: {{half(count)}}
-  </div>
-</div>
-
-<div ng-controller="cowsay">
-  <select ng-model="type" ng-options="type for type in types"></select>
-  <label>
-    <input type="radio" ng-model="method" value="say">
-    Say
-  </label>
-  <label>
-    <input type="radio" ng-model="method" value="think">
-    Think
-  </label>
-  <input type="text" ng-model="text">
-  <pre>{{say(type, method, text)}}</pre>
-  <ul>
-    <li ng-show="type.startsWith('d')" ng-repeat="type in types">{{type}}</li>
-  </ul>
-</div> -->
