@@ -1,0 +1,25 @@
+<header>
+  <div id="logo" ng-click="reset()">Freelancer's Fury</div>
+  <nav>
+    <h3 ng-click="reset()">Reset Game</h3>
+  </nav>
+</header>
+
+<main>
+    <section>
+      <h2 ng-show="hasName">You are at {{currentLoc}}</h2>  <!-- office, coffee shop, client office, bar -->
+      <div class="responses">
+        <input ng-show="!hasName" ng-model="name" placeholder="what is your name?"></input>
+        <button ng-show="!hasName" ng-click="submitName()">Enter</button>
+
+        <input ng-show="hasName" ng-model="input" placeholder="Commands : 'get', 'go to', 'use', or 'buy'" onblur="this.focus()" autofocus></input>
+        <button ng-show="hasName" ng-click="submit()">Enter</button>
+      </div>
+      <p style="white-space:pre-wrap;">{{prompt}}</p>
+    </section>
+  </main>
+
+  <footer>
+    <h5>{{displayInv()}}</h5>
+    <h5>{{displayBal()}}</h5>
+  </footer>
