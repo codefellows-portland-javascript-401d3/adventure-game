@@ -1,0 +1,36 @@
+h1 {
+  color: steelblue;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  font-size: 2rem;
+}
+
+input {
+  font-family: 'Inconsolata', monospace;
+  font-size: 2rem;
+}
+
+select {
+  font-family: 'Inconsolata', monospace;
+  font-size: 2rem;
+}
+
+.item-color {
+  color: #00cc66;
+}
+
+.enemy-color {
+  color: #ff5c33
+}
+
+.game-status {
+  color: #3366ff
+}
+
+.game-message {
+  color: #cc0000;
+}

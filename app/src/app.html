@@ -1,0 +1,60 @@
+<div ng-controller="game">
+  <h1> The Cat House </h1>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div id="game-information" ng-controller="player">
+          <h3 ng-if="!gameSettings.completed"><b>Game Status: {{getStatus()}}</b></h3>
+          <div ng-if="gameSettings.completed">
+            <p>Game Status: <span class="game-status">{{getStatus()}}</span></p>
+            <p>{{getEnd()}}</p>
+          </div>
+          <div ng-if="!gameSettings.completed">
+            <label>Command: <input type="text" ng-model="gameInput" ng-keydown="checkEvent($event, playerAction)" placeholder={{init}}>
+          </div>
+          <div class="game-message">{{message}}</div>
+          <div>{{gameState}}</div>
+
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div ng-if="!gameSettings.completed">
+          <h3><b><em>Game Commands</em></b></h3>
+          <ul>
+            <li ng-show="gameCommands" ng-repeat="each in gameCommands">{{each}}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div id="player-information" class="col-sm-6">
+        <h3><b><em>Player Information</em></b></h3>
+        <ul>
+          <li>Player Status: {{getPlayerStatus()}}</li>
+          <div ng-if="!gameSettings.completed">
+            <li ng-if="user.items.length === 0">Your Item: None</li>
+            <li ng-if="user.items.length > 0">Your Item: <span class="item-color">{{user.items[0]}}</span></li>
+          </div>
+        </ul>
+      </div>
+
+      <div id="room-information" class="col-sm-6" ng-if="!gameSettings.completed">
+        <h3><b><em>Room Information</em></b></h3>
+        <ul>
+          <li>Location: {{user.location.name}}</li>
+          <li ng-if="!user.location.enemy">Enemies: {{showEnemies(current)}}</li>
+          <li ng-if="user.location.enemy">Enemies: <span class="enemy-color">{{showEnemies(current)}}</span></li>
+          <li ng-if="user.location.items.length === 0">Items: None</li>
+        </ul>
+        <ul ng-if="user.location.items.length > 0">Items:
+          <li  ng-show="user.location.items" ng-repeat="each in user.location.items"><span class="item-color">{{each}}</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
