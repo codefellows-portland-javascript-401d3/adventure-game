@@ -54,7 +54,7 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _app3 = __webpack_require__(12);
+	var _app3 = __webpack_require__(13);
 	
 	var _app4 = _interopRequireDefault(_app3);
 	
@@ -31884,8 +31884,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js?sourceMap!./main.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js?sourceMap!./main.css");
+			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./main.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./main.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -31903,7 +31903,7 @@
 	
 	
 	// module
-	exports.push([module.id, "h1 {\n  color: steelblue;\n  margin-top: 2%;\n  margin-left: 2%;\n}\n\n/*body {\n  font-family: 'VT323', monospace;\n}\n\nbody {\n  font-family: 'Special Elite', cursive;\n}*/\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n", "", {"version":3,"sources":["/./app/src/main.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,eAAe;EACf,gBAAgB;CACjB;;AAED;;;;;;GAMG;;AAEH;EACE,sCAAsC;EACtC,gBAAgB;CACjB;;AAED;EACE,sCAAsC;EACtC,gBAAgB;CACjB;;AAED;EACE,sCAAsC;EACtC,gBAAgB;CACjB","file":"main.css","sourcesContent":["h1 {\n  color: steelblue;\n  margin-top: 2%;\n  margin-left: 2%;\n}\n\n/*body {\n  font-family: 'VT323', monospace;\n}\n\nbody {\n  font-family: 'Special Elite', cursive;\n}*/\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "h1 {\n  color: steelblue;\n  margin-top: 2%;\n  margin-left: 2%;\n}\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\n.item-color {\n  color: #00cc66;\n}\n\n.enemy-color {\n  color: #ff5c33\n}\n\n.game-status {\n  color: #3366ff\n}\n\n.game-message {\n  color: #cc0000;\n}\n", "", {"version":3,"sources":["/./src/main.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,eAAe;EACf,gBAAgB;CACjB;;AAED;EACE,sCAAsC;EACtC,gBAAgB;CACjB;;AAED;EACE,sCAAsC;EACtC,gBAAgB;CACjB;;AAED;EACE,sCAAsC;EACtC,gBAAgB;CACjB;;AAED;EACE,eAAe;CAChB;;AAED;EACE,cAAc;CACf;;AAED;EACE,cAAc;CACf;;AAED;EACE,eAAe;CAChB","file":"main.css","sourcesContent":["h1 {\n  color: steelblue;\n  margin-top: 2%;\n  margin-left: 2%;\n}\n\nbody {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\ninput {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\nselect {\n  font-family: 'Inconsolata', monospace;\n  font-size: 2rem;\n}\n\n.item-color {\n  color: #00cc66;\n}\n\n.enemy-color {\n  color: #ff5c33\n}\n\n.game-status {\n  color: #3366ff\n}\n\n.game-message {\n  color: #cc0000;\n}\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -32234,7 +32234,7 @@
 	
 	var _game2 = _interopRequireDefault(_game);
 	
-	var _player = __webpack_require__(11);
+	var _player = __webpack_require__(12);
 	
 	var _player2 = _interopRequireDefault(_player);
 	
@@ -32260,6 +32260,8 @@
 	
 	var _user = __webpack_require__(10);
 	
+	var _rooms = __webpack_require__(11);
+	
 	function game($scope) {
 	
 	  $scope.init = 'Enter Commands Here.';
@@ -32267,57 +32269,7 @@
 	  $scope.gameState = null;
 	  $scope.gameCommands = ['forward', 'back', 'drop', 'grab', 'use', 'grab: item', 'make sandwich'];
 	
-	  $scope.rooms = {};
-	
-	  $scope.rooms.hallway = {
-	    name: 'hallway',
-	    visited: 0,
-	    items: [],
-	    initial: 'You are in a hallway in a house. It\'s dark. There is a door to the living room next to you. Really, your only option is to go forward, so just do that.',
-	    beenHere: 'Back in the hallway? Come on, it\'s a hallway. Get over it already.'
-	  };
-	
-	  $scope.rooms.living = {
-	    name: 'living room',
-	    visited: 0,
-	    items: ['pouch'],
-	    initial: 'You are in the living room. There is a door to the west and a pouch on the floor. What would you like to do?',
-	    beenHere: 'Back in the living room. Anything interesting in here?',
-	    pickup: 'You pick up the pouch and stash for use later. Now what?'
-	  };
-	
-	  $scope.rooms.dining = {
-	    name: 'dining room',
-	    visited: 0,
-	    items: ['deli meat'],
-	    enemy: 'Panther',
-	    initial: 'You enter the dining room. A panther rests in a doorway that leads to the kitchen. Some delicious looking deli meat sits on the table. What now?',
-	    noEnemy: 'Back in the dining room. Panther still seems satiated. Where to? Maybe to the kitchen?',
-	    leaveEarly: 'You attempt to walk past the panther into the kitchen. The panther gets angry and eats you and the delicious deli meat that was on the table. Too bad!',
-	    feed: 'You offer the deli meat to the panther, and it seems content. But too bad, now no lunch meat for you. What next?'
-	  };
-	
-	  $scope.rooms.kitchen = {
-	    name: 'kitchen',
-	    visited: 0,
-	    items: ['steak knife'],
-	    enemy: 'Lion',
-	    initial: 'You are now in the kitchen. It appears as though there is a lion at the other end of the room. There is a steak knife on the counter. There is fresh bread and sandwich fixings on the island, including more lunch meat! What would you like to do?',
-	    noEnemy: 'You are back in the kitchen. The lion is still enjoying the catnip. How \'bout that sandwich?',
-	    pouch: 'You open the pouch and pour out a large amount of catnip. The lion is very happy and no longer seems interested in you. Now what?',
-	    knife: 'You attempt to fight the lion with the steak knife, but come on, it\'s a lion! You are devoured. You lose.',
-	    leaveEarly: 'You make a sandwich and the lion that was sleeping on the other side of the room comes over. It eats you and your sandwich.',
-	    win: 'You make a sandwich and head out to the beach. Nice Work!'
-	  };
-	
-	  $scope.rooms.hallway.forward = $scope.rooms.living;
-	  $scope.rooms.hallway.back = null;
-	  $scope.rooms.living.forward = $scope.rooms.dining;
-	  $scope.rooms.living.back = $scope.rooms.hallway;
-	  $scope.rooms.dining.forward = $scope.rooms.kitchen;
-	  $scope.rooms.dining.back = $scope.rooms.living;
-	  $scope.rooms.kitchen.forward = null;
-	  $scope.rooms.kitchen.back = $scope.rooms.dining;
+	  $scope.rooms = _rooms.rooms;
 	
 	  $scope.user = new _user.User({
 	    location: $scope.rooms.hallway,
@@ -32359,7 +32311,7 @@
 	    if (room.enemy && dir === 'forward') {
 	      $scope.gameSettings.completed = true;
 	      $scope.user.alive = false;
-	      $scope.message = room.leaveEarly;
+	      return room.leaveEarly;
 	    } else {
 	      return $scope.user.travel(dir);
 	    }
@@ -32415,8 +32367,6 @@
 	        output = this.location.initial;
 	        this.location.visited++;
 	      } else if (!this.location.enemy && !this.location.noEnemy) {
-	        //check for a 'had item' property that would indicate room once contained an item
-	        //also a check that room had been visited before
 	        this.location.visited > 0 ? (output = this.location.beenHere, this.location.visited++) : (output = this.location.initial, this.location.visited++);
 	      } else {
 	        output = this.location.noEnemy;
@@ -32433,6 +32383,69 @@
 
 /***/ },
 /* 11 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var rooms = {};
+	
+	rooms.hallway = {
+	  name: 'hallway',
+	  visited: 0,
+	  items: [],
+	  initial: 'You are in a hallway in a house. It\'s dark. There is a door to the living room next to you. Really, your only option is to go forward, so just do that.',
+	  beenHere: 'Back in the hallway? Come on, it\'s a hallway. Get over it already.'
+	};
+	
+	rooms.living = {
+	  name: 'living room',
+	  visited: 0,
+	  items: ['pouch'],
+	  initial: 'You are in the living room. There is a door to the west and a pouch on the floor. What would you like to do?',
+	  beenHere: 'Back in the living room. Anything interesting in here?',
+	  pickup: 'You pick up the pouch and stash for use later. Now what?'
+	};
+	
+	rooms.dining = {
+	  name: 'dining room',
+	  visited: 0,
+	  items: ['deli meat'],
+	  enemy: 'Panther',
+	  initial: 'You enter the dining room. A panther rests in a doorway that leads to the kitchen. Some delicious looking deli meat sits on the table. What now?',
+	  noEnemy: 'Back in the dining room. Panther still seems satiated. Where to? Maybe to the kitchen?',
+	  leaveEarly: 'You attempt to walk past the panther into the kitchen. The panther gets angry and eats you and the delicious deli meat that was on the table. Too bad!',
+	  feed: 'You offer the deli meat to the panther, and it seems content. But too bad, now no lunch meat for you. What next?'
+	};
+	
+	rooms.kitchen = {
+	  name: 'kitchen',
+	  visited: 0,
+	  items: ['steak knife'],
+	  enemy: 'Lion',
+	  initial: 'You are now in the kitchen. It appears as though there is a lion at the other end of the room. There is a steak knife on the counter. There is fresh bread and sandwich fixings on the island, including more lunch meat! What would you like to do?',
+	  noEnemy: 'You are back in the kitchen. The lion is still enjoying the catnip. How \'bout that sandwich?',
+	  pouch: 'You open the pouch and pour out a large amount of catnip. The lion is very happy and no longer seems interested in you. Now what?',
+	  knife: 'You attempt to fight the lion with the steak knife, but come on, it\'s a lion! You are devoured. You lose.',
+	  leaveEarly: 'You make a sandwich and the lion that was sleeping on the other side of the room comes over. It eats you and your sandwich.',
+	  win: 'You make a sandwich and head out to the beach. Nice Work!'
+	};
+	
+	rooms.hallway.forward = rooms.living;
+	rooms.hallway.back = null;
+	rooms.living.forward = rooms.dining;
+	rooms.living.back = rooms.hallway;
+	rooms.dining.forward = rooms.kitchen;
+	rooms.dining.back = rooms.living;
+	rooms.kitchen.forward = null;
+	rooms.kitchen.back = rooms.dining;
+	
+	exports.rooms = rooms;
+
+/***/ },
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32543,10 +32556,10 @@
 	}
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-controller=\"game\">\n  <h1> The Cat House </h1>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <div ng-if=\"!gameSettings.completed\">\n          <h3>Game Commands</h3>\n          <ul>\n            <li ng-show=\"gameCommands\" ng-repeat=\"each in gameCommands\">{{each}}</li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"col-md-4\">\n        <div id=\"game-information\" ng-controller=\"player\">\n          <h3>Game Information</h3>\n          <div ng-if=\"gameSettings.completed\">\n            <p>Game Status: {{getStatus()}}\n            <p>{{getEnd()}}</p>\n          </div>\n          <div ng-if=\"!gameSettings.completed\">\n            <label>Command: <input type=\"text\" ng-model=\"gameInput\" ng-keydown=\"checkEvent($event, playerAction)\" placeholder={{init}}>\n          </div>\n          <div>{{message}}</div>\n          <div>{{gameState}}</div>\n          <p ng-if=\"!gameSettings.completed\">Game Status: {{getStatus()}}</p>\n        </div>\n      </div>\n    </div>\n\n\n    <div id=\"player-information\">\n      <h3>Player Information</h3>\n      <ul>\n        <li>Player Status: {{getPlayerStatus()}}</li>\n        <li ng-if=\"!gameSettings.completed\">Your Item: {{user.items[0]}}</li>\n      </ul>\n    </div>\n\n    <div id=\"room-information\" ng-if=\"!gameSettings.completed\">\n      <h3>Room Information</h3>\n      <ul>\n        <li>Location: {{user.location.name}}</li>\n        <li>Enemies: {{showEnemies(current)}}</li>\n        <li ng-if=\"user.location.items.length === 0\">Items: None</li>\n        <ul ng-if=\"user.location.items.length > 0\">Items:\n          <li  ng-show=\"user.location.items\" ng-repeat=\"each in user.location.items\">{{each}}</li>\n        </ul>\n      </ul>\n    </div>\n\n  </div>\n</div>\n\n<!-- <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js\"></script>\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script> -->\n";
+	module.exports = "<div ng-controller=\"game\">\n  <h1> The Cat House </h1>\n  <div class=\"container\">\n\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <div id=\"game-information\" ng-controller=\"player\">\n          <h3 ng-if=\"!gameSettings.completed\"><b>Game Status: {{getStatus()}}</b></h3>\n          <div ng-if=\"gameSettings.completed\">\n            <p>Game Status: <span class=\"game-status\">{{getStatus()}}</span></p>\n            <p>{{getEnd()}}</p>\n          </div>\n          <div ng-if=\"!gameSettings.completed\">\n            <label>Command: <input type=\"text\" ng-model=\"gameInput\" ng-keydown=\"checkEvent($event, playerAction)\" placeholder={{init}}>\n          </div>\n          <div class=\"game-message\">{{message}}</div>\n          <div>{{gameState}}</div>\n\n        </div>\n      </div>\n\n      <div class=\"col-sm-6\">\n        <div ng-if=\"!gameSettings.completed\">\n          <h3><b><em>Game Commands</em></b></h3>\n          <ul>\n            <li ng-show=\"gameCommands\" ng-repeat=\"each in gameCommands\">{{each}}</li>\n          </ul>\n        </div>\n      </div>\n\n    </div>\n\n    <div class=\"row\">\n      <div id=\"player-information\" class=\"col-sm-6\">\n        <h3><b><em>Player Information</em></b></h3>\n        <ul>\n          <li>Player Status: {{getPlayerStatus()}}</li>\n          <div ng-if=\"!gameSettings.completed\">\n            <li ng-if=\"user.items.length === 0\">Your Item: None</li>\n            <li ng-if=\"user.items.length > 0\">Your Item: <span class=\"item-color\">{{user.items[0]}}</span></li>\n          </div>\n        </ul>\n      </div>\n\n      <div id=\"room-information\" class=\"col-sm-6\" ng-if=\"!gameSettings.completed\">\n        <h3><b><em>Room Information</em></b></h3>\n        <ul>\n          <li>Location: {{user.location.name}}</li>\n          <li ng-if=\"!user.location.enemy\">Enemies: {{showEnemies(current)}}</li>\n          <li ng-if=\"user.location.enemy\">Enemies: <span class=\"enemy-color\">{{showEnemies(current)}}</span></li>\n          <li ng-if=\"user.location.items.length === 0\">Items: None</li>\n        </ul>\n        <ul ng-if=\"user.location.items.length > 0\">Items:\n          <li  ng-show=\"user.location.items\" ng-repeat=\"each in user.location.items\"><span class=\"item-color\">{{each}}</span></li>\n        </ul>\n      </div>\n    </div>\n\n  </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

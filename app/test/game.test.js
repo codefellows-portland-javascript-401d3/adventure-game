@@ -29,4 +29,21 @@ describe('game controller', () => {
     assert.equal($scope.getPlayerStatus(), 'Alive and Well.');
   });
 
+  it('shows enemies when they are in the room', () => {
+    $scope.setCurrent('forward');
+    $scope.setCurrent('forward');
+    assert.equal($scope.showEnemies(), 'Panther');
+  });
+
+  it('shows items when they are in the room', () => {
+    $scope.setCurrent('forward');
+    $scope.setCurrent('forward');
+    assert.equal($scope.showItems(), 'deli meat');
+  });
+
+  it('outputs correct user status when game is over', () => {
+    $scope.gameSettings.won = true;
+    assert.equal($scope.getEnd(), 'You win!');
+  });
+
 });
